@@ -1,0 +1,84 @@
+name: Android Build
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - 'SocialWorkAcademy_*.zip'
+      - 'upload/*.zip'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Unpack project zip
+        id: unpack
+        shell: bash
+        run: |
+          shopt -s nullglob
+          zips=(upload/*.zip SocialWorkAcademy_*.zip)
+          if [ ${#zips[@]} -eq 0 ]; then
+            echo "No project zip found, building the repository as it is."
+            echo "unpacked=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          rm -rf /tmp/unz && mkdir /tmp/unz
+          for z in "${zips[@]}"; do
+            echo "Unpacking $z"
+            unzip -oq "$z" -d /tmp/unz
+          done
+          marker=$(find /tmp/unz -name settings.gradle.kts | head -n 1)
+          if [ -z "$marker" ]; then
+            echo "::error::settings.gradle.kts not found inside the zip"
+            exit 1
+          fi
+          rsync -a --exclude='.github' --exclude='upload' "$(dirname "$marker")"/ ./
+          echo "unpacked=true" >> "$GITHUB_OUTPUT"
+
+      - name: Check project files
+        shell: bash
+        run: |
+          if [ ! -f gradlew ]; then
+            echo "::error::gradlew not found. Upload SocialWorkAcademy_PhaseN.zip first."
+            exit 1
+          fi
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - run: chmod +x gradlew
+
+      - name: Unit tests and debug APK
+        run: ./gradlew testDebugUnitTest assembleDebug --stacktrace
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SocialWorkAcademy-debug-apk
+          path: app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+
+      - name: Commit unpacked files and remove the zip
+        if: success() && steps.unpack.outputs.unpacked == 'true'
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rm -f upload/*.zip SocialWorkAcademy_*.zip
+          git add -A -- . ':!.github'
+          git update-index --chmod=+x gradlew || true
+          if ! git diff --cached --quiet; then
+            git commit -m "Unpack uploaded project zip"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
