@@ -64,6 +64,10 @@ class QuizViewModel(application: Application) : AndroidViewModel(application) {
         _session.value = _session.value?.answer(index, option)
     }
 
+    fun toggleMark(index: Int) {
+        _session.value = _session.value?.toggleMark(index)
+    }
+
     fun goTo(index: Int) {
         _session.value = _session.value?.goTo(index)
     }
@@ -83,7 +87,7 @@ class QuizViewModel(application: Application) : AndroidViewModel(application) {
         val wrong = old.incorrectQuestions()
         if (wrong.isEmpty()) return false
         _session.value = QuizSession(
-            config = old.config.copy(count = wrong.size),
+            config = old.config.forRetry(wrong.size),
             questions = wrong.shuffled(),
             startedAtMillis = System.currentTimeMillis()
         )

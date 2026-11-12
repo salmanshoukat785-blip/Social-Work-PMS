@@ -29,6 +29,7 @@ object QuizJson {
                     .put("ch", JSONArray(a.chosen))
                     .put("c", a.correct)
                     .put("d", a.durationSeconds)
+                    .put("m", a.mock)
             )
         }
         return array.toString()
@@ -50,7 +51,8 @@ object QuizJson {
                     questionIds = (0 until ids.length()).map { ids.getString(it) },
                     chosen = (0 until ch.length()).map { ch.getInt(it) },
                     correct = o.getInt("c"),
-                    durationSeconds = o.getLong("d")
+                    durationSeconds = o.getLong("d"),
+                    mock = o.optBoolean("m", false)
                 )
             }
         } catch (e: Exception) {

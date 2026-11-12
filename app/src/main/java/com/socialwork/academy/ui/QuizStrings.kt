@@ -53,8 +53,28 @@ data class QuizStrings(
     val backToPractice: String,
     val historyTitle: String,
     val noHistory: String,
-    val reviewTitle: String
+    val reviewTitle: String,
+    // Mock tests (Phase 7)
+    val mockOpen: String,
+    val mockTitle: String,
+    val mockNote: String,
+    val mockStart: String,
+    val durationTitle: String,
+    val markLabel: String,
+    val unmarkLabel: String,
+    val markedFormat: String,
+    val navigatorTitle: String,
+    val navigatorHelp: String,
+    val mockTag: String,
+    val filterAll: String,
+    val filterWrong: String,
+    val filterUnanswered: String,
+    val noItemsInFilter: String,
+    val mockHistoryTitle: String,
+    val close: String
 ) {
+    fun marked(n: Int): String = markedFormat.replace("{n}", n.toString())
+
     fun minutes(n: Int): String = minutesFormat.replace("{n}", n.toString())
 
     fun available(n: Int): String = availableFormat.replace("{n}", n.toString())
@@ -82,7 +102,10 @@ data class QuizStrings(
         correct, wrong, yourAnswer, rightAnswer, explanation, notAnswered, timeUp, resultTitle,
         scoreFormat, correctLabel, wrongLabel, unansweredLabel, timeTaken, topicAccuracyTitle,
         noAccuracy, accuracyFormat, reviewAnswers, retryIncorrect, perfectScore, backToPractice,
-        historyTitle, noHistory, reviewTitle
+        historyTitle, noHistory, reviewTitle,
+        mockOpen, mockTitle, mockNote, mockStart, durationTitle, markLabel, unmarkLabel,
+        markedFormat, navigatorTitle, navigatorHelp, mockTag, filterAll, filterWrong,
+        filterUnanswered, noItemsInFilter, mockHistoryTitle, close
     )
 
     companion object {
@@ -139,7 +162,25 @@ data class QuizStrings(
             backToPractice = "Back to practice",
             historyTitle = "Recent quizzes",
             noHistory = "Your finished quizzes will appear here.",
-            reviewTitle = "Review"
+            reviewTitle = "Review",
+            mockOpen = "Mock test",
+            mockTitle = "Mock test",
+            mockNote = "An exam-style test: timed, and answers are shown only after you submit. " +
+                "The questions are the same additional practice questions, not past papers.",
+            mockStart = "Start mock test",
+            durationTitle = "Duration",
+            markLabel = "Mark for review",
+            unmarkLabel = "Marked for review",
+            markedFormat = "{n} marked for review.",
+            navigatorTitle = "Questions",
+            navigatorHelp = "Filled = answered. Flag = marked for review. [n] = where you are.",
+            mockTag = "Mock test",
+            filterAll = "All",
+            filterWrong = "Wrong",
+            filterUnanswered = "Unanswered",
+            noItemsInFilter = "No questions in this group.",
+            mockHistoryTitle = "Recent mock tests",
+            close = "Close"
         )
 
         val Urdu = QuizStrings(
@@ -195,7 +236,25 @@ data class QuizStrings(
             backToPractice = "مشق پر واپس",
             historyTitle = "حالیہ کوئز",
             noHistory = "مکمل کیے ہوئے کوئز یہاں نظر آئیں گے۔",
-            reviewTitle = "جائزہ"
+            reviewTitle = "جائزہ",
+            mockOpen = "ماک ٹیسٹ",
+            mockTitle = "ماک ٹیسٹ",
+            mockNote = "امتحان جیسا ٹیسٹ: وقت کی پابندی کے ساتھ، اور جوابات جمع کرانے کے بعد ہی دکھائے جاتے ہیں۔ " +
+                "سوالات وہی اضافی مشقی سوالات ہیں، پچھلے پرچے نہیں۔",
+            mockStart = "ماک ٹیسٹ شروع کریں",
+            durationTitle = "دورانیہ",
+            markLabel = "جائزے کے لیے نشان لگائیں",
+            unmarkLabel = "جائزے کے لیے نشان زد",
+            markedFormat = "{n} سوالات جائزے کے لیے نشان زد ہیں۔",
+            navigatorTitle = "سوالات",
+            navigatorHelp = "بھرا ہوا = جواب دیا۔ جھنڈا = جائزے کے لیے نشان زد۔ [n] = آپ یہاں ہیں۔",
+            mockTag = "ماک ٹیسٹ",
+            filterAll = "سب",
+            filterWrong = "غلط",
+            filterUnanswered = "بغیر جواب",
+            noItemsInFilter = "اس گروپ میں کوئی سوال نہیں۔",
+            mockHistoryTitle = "حالیہ ماک ٹیسٹ",
+            close = "بند کریں"
         )
 
         fun forLanguage(isUrdu: Boolean): QuizStrings = if (isUrdu) Urdu else English

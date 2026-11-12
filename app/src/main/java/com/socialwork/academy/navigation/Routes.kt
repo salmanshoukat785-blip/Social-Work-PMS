@@ -20,6 +20,7 @@ object Routes {
     const val BOOKMARKS = "bookmarks"
 
     // Quiz flow (opened from Practice)
+    const val MOCK = "mock"
     const val QUIZ = "quiz"
     const val QUIZ_RESULT = "quiz_result"
     const val QUIZ_REVIEW = "quiz_review"

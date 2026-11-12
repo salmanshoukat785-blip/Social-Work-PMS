@@ -56,6 +56,7 @@ fun PracticeScreen(
     topicStats: Map<String, TopicScore>,
     onStart: (QuizConfig) -> Unit,
     onOpenAttempt: (QuizAttempt) -> Unit,
+    onOpenMock: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -72,6 +73,11 @@ fun PracticeScreen(
             McqState.Loading -> item { Text(qs.loading) }
             McqState.Failed -> item { InfoCard(text = qs.loadError) }
             is McqState.Ready -> {
+                item {
+                    OutlinedButton(onClick = onOpenMock, modifier = Modifier.fillMaxWidth()) {
+                        Text(qs.mockOpen)
+                    }
+                }
                 item { SetupCard(strings, qs, isUrdu, mcq, onStart) }
                 item {
                     Text(qs.historyTitle, style = MaterialTheme.typography.titleMedium)
@@ -232,7 +238,7 @@ private fun ScopeChip(label: String, selected: Boolean, onClick: () -> Unit) {
 }
 
 @Composable
-private fun HistoryRow(
+fun HistoryRow(
     strings: AppStrings,
     qs: QuizStrings,
     isUrdu: Boolean,
@@ -252,7 +258,8 @@ private fun HistoryRow(
     ) {
         Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(2.dp)) {
             Text(
-                text = scopeLabel(attempt.scopeKey, strings, qs, isUrdu),
+                text = (if (attempt.mock) qs.mockTag + " - " else "") +
+                    scopeLabel(attempt.scopeKey, strings, qs, isUrdu),
                 style = MaterialTheme.typography.titleSmall
             )
             Text(

@@ -2,6 +2,14 @@ package com.socialwork.academy.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.material3.FilterChip
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -26,6 +34,7 @@ import com.socialwork.academy.ui.AppStrings
 import com.socialwork.academy.ui.QuizStrings
 
 /** Every question of a finished quiz with the right answer, your answer and the explanation. */
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun QuizReviewScreen(
     strings: AppStrings,
@@ -33,6 +42,16 @@ fun QuizReviewScreen(
     items: List<ReviewItem>,
     onBack: () -> Unit
 ) {
+    var filter by rememberSaveable { mutableStateOf("all") } // all, wrong, unanswered
+    val shown = remember(items, filter) {
+        items.withIndex().filter { (_, item) ->
+            when (filter) {
+                "wrong" -> item.isAnswered && !item.isCorrect
+                "unanswered" -> !item.isAnswered
+                else -> true
+            }
+        }
+    }
     Column(modifier = Modifier.fillMaxSize()) {
         Row(
             modifier = Modifier
@@ -49,12 +68,26 @@ fun QuizReviewScreen(
             InfoCard(text = qs.loadError, modifier = Modifier.padding(16.dp))
             return@Column
         }
+        FlowRow(
+            modifier = Modifier.padding(horizontal = 16.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            FilterChip(filter == "all", { filter = "all" }, { Text(qs.filterAll) })
+            FilterChip(filter == "wrong", { filter = "wrong" }, { Text(qs.filterWrong) })
+            FilterChip(
+                filter == "unanswered", { filter = "unanswered" }, { Text(qs.filterUnanswered) }
+            )
+        }
+        if (shown.isEmpty()) {
+            InfoCard(text = qs.noItemsInFilter, modifier = Modifier.padding(16.dp))
+        }
         LazyColumn(
             modifier = Modifier.weight(1f),
             contentPadding = androidx.compose.foundation.layout.PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            itemsIndexed(items) { i, item -> ReviewCard(qs, i + 1, item) }
+            // The number shown is the question's place in the quiz, even when filtered.
+            itemsIndexed(shown) { _, entry -> ReviewCard(qs, entry.index + 1, entry.value) }
         }
     }
 }

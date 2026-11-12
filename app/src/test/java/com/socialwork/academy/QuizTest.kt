@@ -133,4 +133,44 @@ class QuizTest {
         assertTrue(QuizJson.decodeStats("{{").isEmpty())
         assertFalse(QuizJson.decodeStats("{\"a\":[1,1]}").isEmpty())
     }
+
+    @Test
+    fun markingForReviewTogglesAndStopsAfterFinish() {
+        val s = session().toggleMark(1)
+        assertEquals(setOf(1), s.marked)
+        assertTrue(s.toggleMark(1).marked.isEmpty())
+        assertEquals(s, s.toggleMark(99))
+        val done = s.finish(2_000L)
+        assertEquals(done, done.toggleMark(0))
+    }
+
+    @Test
+    fun mockFlagIsSavedAndOldHistoryStillLoads() {
+        val mock = session(config(timer = 60, feedback = false).copy(mock = true))
+            .answer(0, 0).finish(3_000L).toAttempt()
+        assertTrue(mock.mock)
+        val back = QuizJson.decodeAttempts(QuizJson.encodeAttempts(listOf(mock)))
+        assertTrue(back.single().mock)
+
+        // History saved by Phase 6 has no "m" field: it must load as a normal quiz.
+        val old = """[{"t":1,"s":"all","u":false,"ids":["1"],"ch":[0],"c":1,"d":5}]"""
+        val loaded = QuizJson.decodeAttempts(old)
+        assertEquals(1, loaded.size)
+        assertFalse(loaded.single().mock)
+    }
+
+    @Test
+    fun retryAfterMockIsARelaxedPracticeQuiz() {
+        val c = config(timer = 60, feedback = false).copy(mock = true).forRetry(7)
+        assertEquals(7, c.count)
+        assertEquals(0, c.timerMinutes)
+        assertTrue(c.instantFeedback)
+        assertFalse(c.mock)
+    }
+
+    @Test
+    fun mockOptionsAreSensible() {
+        assertTrue(com.socialwork.academy.data.QuizOptions.mockCounts.all { it > 0 })
+        assertTrue(com.socialwork.academy.data.QuizOptions.mockDurations.all { it > 0 })
+    }
 }

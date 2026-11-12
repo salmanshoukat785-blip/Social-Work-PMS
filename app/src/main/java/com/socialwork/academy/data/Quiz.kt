@@ -39,6 +39,10 @@ object QuizOptions {
 
     /** Timer lengths in minutes; 0 means no timer. */
     val timers: List<Int> = listOf(0, 10, 20, 30, 60)
+
+    /** Mock tests: number of questions and duration in minutes. */
+    val mockCounts: List<Int> = listOf(30, 50, 100)
+    val mockDurations: List<Int> = listOf(30, 60, 90, 120)
 }
 
 data class QuizConfig(
@@ -48,8 +52,14 @@ data class QuizConfig(
     val timerMinutes: Int,
     /** true: the answer and explanation are shown right after each question. */
     val instantFeedback: Boolean,
-    val isUrdu: Boolean
-)
+    val isUrdu: Boolean,
+    /** true for an exam-style mock test (timed, answers shown only after submitting). */
+    val mock: Boolean = false
+) {
+    /** Settings for "retry incorrect questions": a relaxed practice quiz, not a timed exam. */
+    fun forRetry(count: Int): QuizConfig =
+        copy(count = count, timerMinutes = 0, instantFeedback = true, mock = false)
+}
 
 object QuizBuilder {
 
@@ -101,7 +111,8 @@ data class QuizAttempt(
     /** Chosen option per question; -1 = not answered. */
     val chosen: List<Int>,
     val correct: Int,
-    val durationSeconds: Long
+    val durationSeconds: Long,
+    val mock: Boolean = false
 ) {
     val total: Int get() = questionIds.size
     val answered: Int get() = chosen.count { it >= 0 }
@@ -122,7 +133,9 @@ data class QuizSession(
     /** question index -> chosen option index */
     val answers: Map<Int, Int> = emptyMap(),
     val currentIndex: Int = 0,
-    val finishedAtMillis: Long? = null
+    val finishedAtMillis: Long? = null,
+    /** Question indexes the student marked for review. */
+    val marked: Set<Int> = emptySet()
 ) {
     val isFinished: Boolean get() = finishedAtMillis != null
 
@@ -138,6 +151,11 @@ data class QuizSession(
         val q = questions.getOrNull(index) ?: return this
         if (option !in q.options.indices || isLocked(index)) return this
         return copy(answers = answers + (index to option))
+    }
+
+    fun toggleMark(index: Int): QuizSession {
+        if (isFinished || index !in questions.indices) return this
+        return copy(marked = if (index in marked) marked - index else marked + index)
     }
 
     fun goTo(index: Int): QuizSession =
@@ -189,7 +207,8 @@ data class QuizSession(
             questionIds = questions.map { it.id },
             chosen = questions.indices.map { answers[it] ?: -1 },
             correct = r.correct,
-            durationSeconds = r.durationSeconds
+            durationSeconds = r.durationSeconds,
+            mock = config.mock
         )
     }
 }

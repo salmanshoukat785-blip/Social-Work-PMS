@@ -3,6 +3,8 @@ package com.socialwork.academy.ui.screens
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,6 +13,10 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Flag
+import androidx.compose.material.icons.filled.GridView
+import androidx.compose.material.icons.outlined.Flag
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
@@ -39,6 +45,7 @@ import kotlinx.coroutines.delay
  * The running quiz. [onFinish] ends and saves it; when the session is finished
  * (by the button or the timer) [onFinished] opens the result screen.
  */
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun QuizScreen(
     strings: AppStrings,
@@ -46,6 +53,7 @@ fun QuizScreen(
     session: QuizSession?,
     onAnswer: (Int, Int) -> Unit,
     onGoTo: (Int) -> Unit,
+    onToggleMark: (Int) -> Unit,
     onFinish: () -> Unit,
     onFinished: () -> Unit,
     onLeave: () -> Unit
@@ -61,6 +69,7 @@ fun QuizScreen(
     }
 
     var confirmFinish by remember { mutableStateOf(false) }
+    var showNavigator by remember { mutableStateOf(false) }
     var now by remember { mutableLongStateOf(System.currentTimeMillis()) }
 
     val deadline = session.deadlineMillis
@@ -106,7 +115,19 @@ fun QuizScreen(
                     style = MaterialTheme.typography.titleMedium,
                     color = if (left <= 60) MaterialTheme.colorScheme.error
                     else MaterialTheme.colorScheme.onSurface,
-                    modifier = Modifier.padding(end = 12.dp)
+                    modifier = Modifier.padding(end = 4.dp)
+                )
+            }
+            IconButton(onClick = { showNavigator = true }) {
+                Icon(Icons.Filled.GridView, contentDescription = qs.navigatorTitle)
+            }
+            val isMarked = index in session.marked
+            IconButton(onClick = { onToggleMark(index) }) {
+                Icon(
+                    imageVector = if (isMarked) Icons.Filled.Flag else Icons.Outlined.Flag,
+                    contentDescription = if (isMarked) qs.unmarkLabel else qs.markLabel,
+                    tint = if (isMarked) MaterialTheme.colorScheme.primary
+                    else MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }
@@ -173,7 +194,12 @@ fun QuizScreen(
         AlertDialog(
             onDismissRequest = { confirmFinish = false },
             title = { Text(qs.finishTitle) },
-            text = { Text(if (left > 0) qs.unanswered(left) else qs.allAnswered) },
+            text = {
+                Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Text(if (left > 0) qs.unanswered(left) else qs.allAnswered)
+                    if (session.marked.isNotEmpty()) Text(qs.marked(session.marked.size))
+                }
+            },
             confirmButton = {
                 TextButton(onClick = {
                     confirmFinish = false
@@ -182,6 +208,42 @@ fun QuizScreen(
             },
             dismissButton = {
                 TextButton(onClick = { confirmFinish = false }) { Text(qs.keepGoing) }
+            }
+        )
+    }
+
+    if (showNavigator) {
+        AlertDialog(
+            onDismissRequest = { showNavigator = false },
+            title = { Text(qs.navigatorTitle) },
+            text = {
+                Column(
+                    modifier = Modifier.verticalScroll(rememberScrollState()),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Text(qs.navigatorHelp, style = MaterialTheme.typography.bodySmall)
+                    FlowRow(
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        verticalArrangement = Arrangement.spacedBy(2.dp)
+                    ) {
+                        session.questions.indices.forEach { i ->
+                            FilterChip(
+                                selected = session.answers.containsKey(i),
+                                onClick = {
+                                    onGoTo(i)
+                                    showNavigator = false
+                                },
+                                label = { Text(if (i == index) "[${i + 1}]" else "${i + 1}") },
+                                leadingIcon = if (i in session.marked) {
+                                    { Icon(Icons.Filled.Flag, contentDescription = qs.markLabel) }
+                                } else null
+                            )
+                        }
+                    }
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = { showNavigator = false }) { Text(qs.close) }
             }
         )
     }

@@ -34,6 +34,7 @@ import com.socialwork.academy.ui.screens.BookmarksScreen
 import com.socialwork.academy.ui.screens.HomeScreen
 import com.socialwork.academy.ui.screens.PaperTopicsScreen
 import com.socialwork.academy.ui.screens.PapersScreen
+import com.socialwork.academy.ui.screens.MockSetupScreen
 import com.socialwork.academy.ui.screens.PracticeScreen
 import com.socialwork.academy.ui.screens.QuizResultScreen
 import com.socialwork.academy.ui.screens.QuizReviewScreen
@@ -179,7 +180,25 @@ fun MainShell(
                     onOpenAttempt = { attempt ->
                         quizVm.openReviewOf(attempt)
                         navController.navigate(Routes.QUIZ_REVIEW)
-                    }
+                    },
+                    onOpenMock = { navController.navigate(Routes.MOCK) }
+                )
+            }
+            composable(Routes.MOCK) {
+                MockSetupScreen(
+                    strings = strings,
+                    qs = quizStrings,
+                    isUrdu = isUrdu,
+                    mcq = mcqState,
+                    attempts = attempts,
+                    onStart = { config ->
+                        if (quizVm.start(config)) navController.navigate(Routes.QUIZ)
+                    },
+                    onOpenAttempt = { attempt ->
+                        quizVm.openReviewOf(attempt)
+                        navController.navigate(Routes.QUIZ_REVIEW)
+                    },
+                    onBack = { navController.popBackStack() }
                 )
             }
             composable(Routes.QUIZ) {
@@ -189,6 +208,7 @@ fun MainShell(
                     session = session,
                     onAnswer = quizVm::answer,
                     onGoTo = quizVm::goTo,
+                    onToggleMark = quizVm::toggleMark,
                     onFinish = quizVm::finish,
                     onFinished = {
                         navController.navigate(Routes.QUIZ_RESULT) {

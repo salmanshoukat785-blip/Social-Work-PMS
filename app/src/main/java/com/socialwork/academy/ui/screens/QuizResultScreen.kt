@@ -55,7 +55,12 @@ fun QuizResultScreen(
         contentPadding = androidx.compose.foundation.layout.PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        item { Text(qs.resultTitle, style = MaterialTheme.typography.titleLarge) }
+        item {
+            Text(
+                text = if (session.config.mock) qs.mockTag + " - " + qs.resultTitle else qs.resultTitle,
+                style = MaterialTheme.typography.titleLarge
+            )
+        }
         item {
             Card(
                 modifier = Modifier.fillMaxWidth(),
