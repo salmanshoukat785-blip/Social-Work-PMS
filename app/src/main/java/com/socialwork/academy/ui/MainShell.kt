@@ -13,11 +13,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -33,6 +35,9 @@ import com.socialwork.academy.ui.screens.HomeScreen
 import com.socialwork.academy.ui.screens.PaperTopicsScreen
 import com.socialwork.academy.ui.screens.PapersScreen
 import com.socialwork.academy.ui.screens.PracticeScreen
+import com.socialwork.academy.ui.screens.QuizResultScreen
+import com.socialwork.academy.ui.screens.QuizReviewScreen
+import com.socialwork.academy.ui.screens.QuizScreen
 import com.socialwork.academy.ui.screens.SearchScreen
 import com.socialwork.academy.ui.screens.SettingsScreen
 import com.socialwork.academy.ui.screens.TopicDetailScreen
@@ -77,13 +82,24 @@ fun MainShell(
         value = if (bundle != null) ContentState.Ready(bundle) else ContentState.Failed
     }
 
+    val quizVm: QuizViewModel = viewModel()
+    val quizStrings = QuizStrings.forLanguage(isUrdu)
+    val mcqState by quizVm.mcq.collectAsState()
+    val attempts by quizVm.attempts.collectAsState()
+    val topicStats by quizVm.topicStats.collectAsState()
+    val session by quizVm.session.collectAsState()
+    val reviewItems by quizVm.review.collectAsState()
+
     val navController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = backStackEntry?.destination?.route
 
     Scaffold(
         bottomBar = {
-            NavigationBar {
+            // The tab bar is hidden while a quiz is on screen so it is not left by accident.
+            val inQuiz = currentRoute == Routes.QUIZ || currentRoute == Routes.QUIZ_RESULT ||
+                currentRoute == Routes.QUIZ_REVIEW
+            if (!inQuiz) NavigationBar {
                 tabs.forEach { tab ->
                     NavigationBarItem(
                         selected = currentRoute == tab.route,
@@ -150,7 +166,67 @@ fun MainShell(
                 )
             }
             composable(Routes.PRACTICE) {
-                PracticeScreen(strings = strings)
+                PracticeScreen(
+                    strings = strings,
+                    qs = quizStrings,
+                    isUrdu = isUrdu,
+                    mcq = mcqState,
+                    attempts = attempts,
+                    topicStats = topicStats,
+                    onStart = { config ->
+                        if (quizVm.start(config)) navController.navigate(Routes.QUIZ)
+                    },
+                    onOpenAttempt = { attempt ->
+                        quizVm.openReviewOf(attempt)
+                        navController.navigate(Routes.QUIZ_REVIEW)
+                    }
+                )
+            }
+            composable(Routes.QUIZ) {
+                QuizScreen(
+                    strings = strings,
+                    qs = quizStrings,
+                    session = session,
+                    onAnswer = quizVm::answer,
+                    onGoTo = quizVm::goTo,
+                    onFinish = quizVm::finish,
+                    onFinished = {
+                        navController.navigate(Routes.QUIZ_RESULT) {
+                            popUpTo(Routes.QUIZ) { inclusive = true }
+                        }
+                    },
+                    onLeave = { navController.popBackStack() }
+                )
+            }
+            composable(Routes.QUIZ_RESULT) {
+                QuizResultScreen(
+                    strings = strings,
+                    qs = quizStrings,
+                    isUrdu = isUrdu,
+                    session = session,
+                    onReview = {
+                        quizVm.openReviewOfCurrent()
+                        navController.navigate(Routes.QUIZ_REVIEW)
+                    },
+                    onRetryIncorrect = {
+                        if (quizVm.retryIncorrect()) {
+                            navController.navigate(Routes.QUIZ) {
+                                popUpTo(Routes.QUIZ_RESULT) { inclusive = true }
+                            }
+                        }
+                    },
+                    onDone = {
+                        navController.popBackStack(Routes.PRACTICE, inclusive = false)
+                    }
+                )
+            }
+            composable(Routes.QUIZ_REVIEW) {
+                QuizReviewScreen(
+                    strings = strings,
+                    qs = quizStrings,
+                    items = reviewItems,
+                    onBack = { navController.popBackStack() }
+                )
             }
             composable(Routes.SETTINGS) {
                 SettingsScreen(

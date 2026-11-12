@@ -19,6 +19,11 @@ object Routes {
     const val SEARCH = "search"
     const val BOOKMARKS = "bookmarks"
 
+    // Quiz flow (opened from Practice)
+    const val QUIZ = "quiz"
+    const val QUIZ_RESULT = "quiz_result"
+    const val QUIZ_REVIEW = "quiz_review"
+
     // Paper -> topic list -> topic detail
     const val PAPER_ARG = "paperId"
     const val PAPER_TOPICS = "paper/{$PAPER_ARG}"
