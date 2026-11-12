@@ -3,6 +3,7 @@ package com.socialwork.academy.ui
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.MenuBook
+import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Quiz
 import androidx.compose.material.icons.filled.Settings
@@ -34,7 +35,12 @@ import com.socialwork.academy.ui.screens.BookmarksScreen
 import com.socialwork.academy.ui.screens.HomeScreen
 import com.socialwork.academy.ui.screens.PaperTopicsScreen
 import com.socialwork.academy.ui.screens.PapersScreen
+import com.socialwork.academy.ui.screens.FlashcardsScreen
+import com.socialwork.academy.ui.screens.GlossaryScreen
 import com.socialwork.academy.ui.screens.MockSetupScreen
+import com.socialwork.academy.ui.screens.MyNotesScreen
+import com.socialwork.academy.ui.screens.PdfReaderScreen
+import com.socialwork.academy.ui.screens.ToolsScreen
 import com.socialwork.academy.ui.screens.PracticeScreen
 import com.socialwork.academy.ui.screens.QuizResultScreen
 import com.socialwork.academy.ui.screens.QuizReviewScreen
@@ -55,6 +61,7 @@ private val tabs = listOf(
     Tab(Routes.HOME, Icons.Filled.Home) { it.tabHome },
     Tab(Routes.PAPERS, Icons.AutoMirrored.Filled.MenuBook) { it.tabPapers },
     Tab(Routes.PRACTICE, Icons.Filled.Quiz) { it.tabPractice },
+    Tab(Routes.TOOLS, Icons.Filled.Build) { it.tabTools },
     Tab(Routes.SETTINGS, Icons.Filled.Settings) { it.tabSettings }
 )
 
@@ -90,6 +97,12 @@ fun MainShell(
     val topicStats by quizVm.topicStats.collectAsState()
     val session by quizVm.session.collectAsState()
     val reviewItems by quizVm.review.collectAsState()
+
+    val studyVm: StudyViewModel = viewModel()
+    val studyStrings = StudyStrings.forLanguage(isUrdu)
+    val notes by studyVm.notes.collectAsState()
+    val knownCards by studyVm.knownCards.collectAsState()
+    val glossary by studyVm.glossary.collectAsState()
 
     val navController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
@@ -248,6 +261,44 @@ fun MainShell(
                     onBack = { navController.popBackStack() }
                 )
             }
+            composable(Routes.TOOLS) {
+                ToolsScreen(
+                    st = studyStrings,
+                    onOpenGlossary = { navController.navigate(Routes.GLOSSARY) },
+                    onOpenFlashcards = { navController.navigate(Routes.FLASHCARDS) },
+                    onOpenMyNotes = { navController.navigate(Routes.MY_NOTES) },
+                    onOpenPdf = { navController.navigate(Routes.PDF_READER) }
+                )
+            }
+            composable(Routes.GLOSSARY) {
+                GlossaryScreen(
+                    strings = strings, st = studyStrings, isUrdu = isUrdu, state = glossary,
+                    onBack = { navController.popBackStack() }
+                )
+            }
+            composable(Routes.FLASHCARDS) {
+                FlashcardsScreen(
+                    strings = strings, st = studyStrings, isUrdu = isUrdu, state = glossary,
+                    known = knownCards,
+                    onSetKnown = studyVm::setKnown,
+                    onClearKnown = studyVm::clearKnown,
+                    onBack = { navController.popBackStack() }
+                )
+            }
+            composable(Routes.MY_NOTES) {
+                MyNotesScreen(
+                    strings = strings, st = studyStrings, isUrdu = isUrdu, notes = notes,
+                    onOpenTopic = { navController.navigate(Routes.topicDetail(it)) },
+                    onDelete = { studyVm.saveNote(it, "") },
+                    onBack = { navController.popBackStack() }
+                )
+            }
+            composable(Routes.PDF_READER) {
+                PdfReaderScreen(
+                    strings = strings, st = studyStrings,
+                    onBack = { navController.popBackStack() }
+                )
+            }
             composable(Routes.SETTINGS) {
                 SettingsScreen(
                     strings = strings,
@@ -295,6 +346,9 @@ fun MainShell(
                         onToggleCompleted = { onTopicCompletedChange(topic.id, it) },
                         onToggleBookmark = { onToggleBookmark(topic.id) },
                         onFontScaleChange = onFontScaleChange,
+                        st = studyStrings,
+                        savedNote = notes[topic.id].orEmpty(),
+                        onNoteSave = { studyVm.saveNote(topic.id, it) },
                         onBack = { navController.popBackStack() }
                     )
                 }

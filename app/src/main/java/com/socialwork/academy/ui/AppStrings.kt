@@ -10,6 +10,7 @@ data class AppStrings(
     val tabPapers: String,
     val tabPractice: String,
     val tabSettings: String,
+    val tabTools: String,
     val welcome: String,
     val welcomeNameFormat: String,
     val tagline: String,
@@ -99,7 +100,7 @@ data class AppStrings(
 
     /** Every text in this language; used by the unit test to catch blanks. */
     fun all(): List<String> = listOf(
-        appName, tabHome, tabPapers, tabPractice, tabSettings, welcome, welcomeNameFormat,
+        appName, tabHome, tabPapers, tabPractice, tabSettings, tabTools, welcome, welcomeNameFormat,
         tagline, paper1, paper2, paper1Sub, paper2Sub, papersTitle, practiceTitle,
         practiceBody, settingsTitle, languageLabel, darkModeLabel, offlineNote,
         back, ob1Title, ob1Body, ob2Title, ob2Body, ob3Title, ob3Body,
@@ -120,6 +121,7 @@ data class AppStrings(
             tabPapers = "Papers",
             tabPractice = "Practice",
             tabSettings = "Settings",
+            tabTools = "Tools",
             welcome = "Welcome",
             welcomeNameFormat = "Welcome, %s",
             tagline = "Social Work exam preparation, fully offline",
@@ -191,6 +193,7 @@ data class AppStrings(
             tabPapers = "پرچے",
             tabPractice = "مشق",
             tabSettings = "ترتیبات",
+            tabTools = "اوزار",
             welcome = "خوش آمدید",
             welcomeNameFormat = "خوش آمدید، %s",
             tagline = "سوشل ورک کے امتحان کی تیاری، مکمل آف لائن",

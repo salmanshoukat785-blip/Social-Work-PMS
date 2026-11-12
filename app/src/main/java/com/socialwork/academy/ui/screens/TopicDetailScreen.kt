@@ -49,6 +49,7 @@ import com.socialwork.academy.data.ReadingText
 import com.socialwork.academy.data.Topic
 import com.socialwork.academy.data.TopicSection
 import com.socialwork.academy.ui.AppStrings
+import com.socialwork.academy.ui.StudyStrings
 
 /**
  * Notes reader for one topic: both-language titles, bookmark, copy, share,
@@ -67,6 +68,9 @@ fun TopicDetailScreen(
     onToggleCompleted: (Boolean) -> Unit,
     onToggleBookmark: () -> Unit,
     onFontScaleChange: (Float) -> Unit,
+    st: StudyStrings,
+    savedNote: String,
+    onNoteSave: (String) -> Unit,
     onBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -203,6 +207,8 @@ fun TopicDetailScreen(
                     }
                 }
             }
+
+            NoteCard(topicId = topic.id, st = st, savedNote = savedNote, onSave = onNoteSave)
         }
     }
 }

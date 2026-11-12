@@ -14,6 +14,13 @@ object Routes {
     const val PAPERS = "papers"
     const val PRACTICE = "practice"
     const val SETTINGS = "settings"
+    const val TOOLS = "tools"
+
+    // Study tools (opened from the Tools tab)
+    const val GLOSSARY = "glossary"
+    const val FLASHCARDS = "flashcards"
+    const val MY_NOTES = "my_notes"
+    const val PDF_READER = "pdf_reader"
 
     // Search and bookmarks (opened from Home and Papers)
     const val SEARCH = "search"
