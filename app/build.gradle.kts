@@ -12,8 +12,8 @@ android {
         applicationId = "com.socialwork.academy"
         minSdk = 24
         targetSdk = 35
-        versionCode = 3
-        versionName = "0.3.0-phase3"
+        versionCode = 4
+        versionName = "0.4.0-phase4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -75,4 +75,6 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
 
     testImplementation("junit:junit:4.13.2")
+    // Android's org.json is not available in plain JVM unit tests.
+    testImplementation("org.json:json:20240303")
 }

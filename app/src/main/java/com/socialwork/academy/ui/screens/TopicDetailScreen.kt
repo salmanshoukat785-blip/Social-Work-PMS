@@ -7,31 +7,42 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import com.socialwork.academy.data.ContentState
 import com.socialwork.academy.data.Topic
+import com.socialwork.academy.data.TopicSection
 import com.socialwork.academy.ui.AppStrings
 
 /**
- * Phase 3: heading, both-language titles and the completed switch.
- * The notes themselves arrive in Phase 4 (content) and Phase 5 (reader).
+ * Phase 4: shows the topic's heading, the completed switch and the study
+ * material taken from the Word file (English and Urdu lists, as in the file).
+ * Phase 5 turns this into the full notes reader (font size, search, bookmarks).
  */
 @Composable
 fun TopicDetailScreen(
     strings: AppStrings,
     isUrdu: Boolean,
     topic: Topic,
+    content: ContentState,
     completed: Boolean,
     onToggleCompleted: (Boolean) -> Unit,
     onBack: () -> Unit,
@@ -88,7 +99,90 @@ fun TopicDetailScreen(
                     Text(strings.markCompleted)
                 }
             }
-            InfoCard(text = strings.topicNotesLater)
+
+            when (content) {
+                ContentState.Loading -> {
+                    CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
+                }
+
+                ContentState.Failed -> InfoCard(text = strings.contentError)
+
+                is ContentState.Ready -> {
+                    val sections = content.bundle.forTopic(topic.id)?.sections.orEmpty()
+                    if (sections.isEmpty()) {
+                        InfoCard(text = strings.noSourcePoints)
+                    } else {
+                        Text(
+                            text = strings.sourceLabel,
+                            style = MaterialTheme.typography.labelMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        sections.forEach { section ->
+                            SectionCard(section = section, isUrdu = isUrdu)
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun SectionCard(section: TopicSection, isUrdu: Boolean) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(20.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+    ) {
+        Column(
+            modifier = Modifier.padding(20.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            val heading = section.heading(isUrdu)
+            val otherHeading = section.otherHeading(isUrdu)
+            if (heading.isNotBlank()) {
+                Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                    Text(text = heading, style = MaterialTheme.typography.titleMedium)
+                    if (otherHeading.isNotBlank()) {
+                        Text(
+                            text = otherHeading,
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
+            }
+
+            // The selected language comes first; both lists are shown as they are in the file.
+            if (isUrdu) {
+                LanguageBlock(label = "اردو", items = section.itemsUr, rtl = true)
+                LanguageBlock(label = "English", items = section.itemsEn, rtl = false)
+            } else {
+                LanguageBlock(label = "English", items = section.itemsEn, rtl = false)
+                LanguageBlock(label = "اردو", items = section.itemsUr, rtl = true)
+            }
+        }
+    }
+}
+
+/** One language's list. Its own text direction, whatever the app language is. */
+@Composable
+private fun LanguageBlock(label: String, items: List<String>, rtl: Boolean) {
+    if (items.isEmpty()) return
+    val direction = if (rtl) LayoutDirection.Rtl else LayoutDirection.Ltr
+    CompositionLocalProvider(LocalLayoutDirection provides direction) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(6.dp)
+        ) {
+            Text(
+                text = label,
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.secondary
+            )
+            items.forEach { item ->
+                Text(text = "• $item", style = MaterialTheme.typography.bodyLarge)
+            }
         }
     }
 }

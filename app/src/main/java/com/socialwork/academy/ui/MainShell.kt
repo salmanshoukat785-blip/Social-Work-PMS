@@ -14,14 +14,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.produceState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.socialwork.academy.data.ContentRepository
+import com.socialwork.academy.data.ContentState
 import com.socialwork.academy.data.TopicCatalog
 import com.socialwork.academy.navigation.Routes
 import com.socialwork.academy.ui.screens.HomeScreen
@@ -30,6 +34,8 @@ import com.socialwork.academy.ui.screens.PapersScreen
 import com.socialwork.academy.ui.screens.PracticeScreen
 import com.socialwork.academy.ui.screens.SettingsScreen
 import com.socialwork.academy.ui.screens.TopicDetailScreen
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 private data class Tab(
     val route: String,
@@ -58,6 +64,13 @@ fun MainShell(
     onTopicOpened: (String) -> Unit,
     onTopicCompletedChange: (String, Boolean) -> Unit
 ) {
+    val context = LocalContext.current
+    // Study content is read once from the app's bundled files (works offline).
+    val contentState by produceState<ContentState>(ContentState.Loading) {
+        val bundle = withContext(Dispatchers.IO) { ContentRepository.load(context) }
+        value = if (bundle != null) ContentState.Ready(bundle) else ContentState.Failed
+    }
+
     val navController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = backStackEntry?.destination?.route
@@ -145,6 +158,7 @@ fun MainShell(
                         strings = strings,
                         isUrdu = isUrdu,
                         topic = topic,
+                        content = contentState,
                         completed = topic.id in completedTopics,
                         onToggleCompleted = { onTopicCompletedChange(topic.id, it) },
                         onBack = { navController.popBackStack() }

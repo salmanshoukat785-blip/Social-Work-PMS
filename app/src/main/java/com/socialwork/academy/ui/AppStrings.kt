@@ -58,7 +58,10 @@ data class AppStrings(
     // Topic screens (Phase 3)
     val markCompleted: String,
     val markNotCompleted: String,
-    val topicNotesLater: String
+    val noSourcePoints: String,
+    // Content (Phase 4)
+    val sourceLabel: String,
+    val contentError: String
 ) {
     fun welcomeName(name: String): String = welcomeNameFormat.replace("%s", name)
 
@@ -80,7 +83,7 @@ data class AppStrings(
         profileTitle, profileHint, nameLabel, institutionLabel, skipForNow,
         statPapers, statTopics, statCompleted, statRemaining, progressTitle, progressFormat,
         continueLearning, noProgressYet, paperSummaryFormat,
-        markCompleted, markNotCompleted, topicNotesLater
+        markCompleted, markNotCompleted, noSourcePoints, sourceLabel, contentError
     )
 
     companion object {
@@ -133,7 +136,9 @@ data class AppStrings(
             paperSummaryFormat = "{total} topics - {done} completed",
             markCompleted = "Mark as completed",
             markNotCompleted = "Completed - tap to undo",
-            topicNotesLater = "The notes for this topic will appear here in a later phase."
+            noSourcePoints = "The Word file has no separate points under this heading.",
+            sourceLabel = "Source: Social Work Paper 1 & 2 (Word file)",
+            contentError = "The study content could not be loaded."
         )
 
         val Urdu = AppStrings(
@@ -185,7 +190,9 @@ data class AppStrings(
             paperSummaryFormat = "{total} موضوعات - {done} مکمل",
             markCompleted = "مکمل کے طور پر نشان زد کریں",
             markNotCompleted = "مکمل - واپس کرنے کے لیے دبائیں",
-            topicNotesLater = "اس موضوع کے نوٹس بعد کے مرحلے میں یہاں نظر آئیں گے۔"
+            noSourcePoints = "ورڈ فائل میں اس عنوان کے تحت الگ نکات موجود نہیں۔",
+            sourceLabel = "ماخذ: سوشل ورک پرچہ 1 اور 2 (ورڈ فائل)",
+            contentError = "مطالعے کا مواد لوڈ نہیں ہو سکا۔"
         )
     }
 }
