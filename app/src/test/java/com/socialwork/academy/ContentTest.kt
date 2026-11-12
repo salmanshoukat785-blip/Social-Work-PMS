@@ -49,6 +49,18 @@ class ContentTest {
     }
 
     @Test
+    fun noHiddenSymbolCharactersInTheText() {
+        // Word's bullet symbol (private-use U+F0B7) must not reach the app.
+        fun bad(s: String) = s.any { it in ''..'' }
+        bundle.topics.values.forEach { topic ->
+            topic.sections.forEach { s ->
+                assertTrue(!bad(s.headingEn) && !bad(s.headingUr))
+                assertTrue(s.itemsEn.none { bad(it) } && s.itemsUr.none { bad(it) })
+            }
+        }
+    }
+
+    @Test
     fun familySectionHasTheTwelveUrduPoints() {
         val family = bundle.forTopic("p1_family")
         assertNotNull(family)

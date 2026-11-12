@@ -22,7 +22,10 @@ import com.socialwork.academy.ui.AppStrings
 fun PapersScreen(
     strings: AppStrings,
     completedTopics: Set<String>,
+    bookmarkCount: Int,
     onOpenPaper: (Int) -> Unit,
+    onOpenSearch: () -> Unit,
+    onOpenBookmarks: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val paper1 = progressFor(TopicCatalog.paper1, completedTopics)
@@ -36,6 +39,12 @@ fun PapersScreen(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Text(text = strings.papersTitle, style = MaterialTheme.typography.titleLarge)
+        QuickActions(
+            strings = strings,
+            bookmarkCount = bookmarkCount,
+            onOpenSearch = onOpenSearch,
+            onOpenBookmarks = onOpenBookmarks
+        )
         PaperCard(
             title = strings.paper1,
             subtitle = strings.paper1Sub + "\n" + strings.paperSummary(paper1.total, paper1.completed),

@@ -38,8 +38,11 @@ fun HomeScreen(
     profileName: String,
     completedTopics: Set<String>,
     lastTopicId: String?,
+    bookmarkCount: Int,
     onOpenPaper: (Int) -> Unit,
     onOpenTopic: (String) -> Unit,
+    onOpenSearch: () -> Unit,
+    onOpenBookmarks: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val overall = progressFor(TopicCatalog.all, completedTopics)
@@ -70,6 +73,13 @@ fun HomeScreen(
         } else {
             InfoCard(text = strings.noProgressYet)
         }
+
+        QuickActions(
+            strings = strings,
+            bookmarkCount = bookmarkCount,
+            onOpenSearch = onOpenSearch,
+            onOpenBookmarks = onOpenBookmarks
+        )
 
         // Numbers
         Row(

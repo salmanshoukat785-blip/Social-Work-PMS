@@ -15,6 +15,10 @@ object Routes {
     const val PRACTICE = "practice"
     const val SETTINGS = "settings"
 
+    // Search and bookmarks (opened from Home and Papers)
+    const val SEARCH = "search"
+    const val BOOKMARKS = "bookmarks"
+
     // Paper -> topic list -> topic detail
     const val PAPER_ARG = "paperId"
     const val PAPER_TOPICS = "paper/{$PAPER_ARG}"

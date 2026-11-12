@@ -15,6 +15,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.socialwork.academy.data.FontScale
 import com.socialwork.academy.navigation.Routes
 import com.socialwork.academy.ui.screens.LanguageScreen
 import com.socialwork.academy.ui.screens.OnboardingScreen
@@ -107,7 +108,11 @@ fun AcademyApp(viewModel: AppViewModel = viewModel()) {
                             darkMode = darkMode,
                             onDarkModeChange = { viewModel.setDarkMode(it) },
                             onTopicOpened = { viewModel.setLastTopic(it) },
-                            onTopicCompletedChange = { id, done -> viewModel.setTopicCompleted(id, done) }
+                            onTopicCompletedChange = { id, done -> viewModel.setTopicCompleted(id, done) },
+                            bookmarks = settings?.bookmarks ?: emptySet(),
+                            fontScale = settings?.fontScale ?: FontScale.DEFAULT,
+                            onToggleBookmark = { viewModel.toggleBookmark(it) },
+                            onFontScaleChange = { viewModel.setFontScale(it) }
                         )
                     }
                 }

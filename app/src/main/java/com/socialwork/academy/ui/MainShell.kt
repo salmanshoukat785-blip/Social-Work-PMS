@@ -28,10 +28,12 @@ import com.socialwork.academy.data.ContentRepository
 import com.socialwork.academy.data.ContentState
 import com.socialwork.academy.data.TopicCatalog
 import com.socialwork.academy.navigation.Routes
+import com.socialwork.academy.ui.screens.BookmarksScreen
 import com.socialwork.academy.ui.screens.HomeScreen
 import com.socialwork.academy.ui.screens.PaperTopicsScreen
 import com.socialwork.academy.ui.screens.PapersScreen
 import com.socialwork.academy.ui.screens.PracticeScreen
+import com.socialwork.academy.ui.screens.SearchScreen
 import com.socialwork.academy.ui.screens.SettingsScreen
 import com.socialwork.academy.ui.screens.TopicDetailScreen
 import kotlinx.coroutines.Dispatchers
@@ -62,7 +64,11 @@ fun MainShell(
     darkMode: Boolean,
     onDarkModeChange: (Boolean) -> Unit,
     onTopicOpened: (String) -> Unit,
-    onTopicCompletedChange: (String, Boolean) -> Unit
+    onTopicCompletedChange: (String, Boolean) -> Unit,
+    bookmarks: Set<String>,
+    fontScale: Float,
+    onToggleBookmark: (String) -> Unit,
+    onFontScaleChange: (Float) -> Unit
 ) {
     val context = LocalContext.current
     // Study content is read once from the app's bundled files (works offline).
@@ -107,15 +113,40 @@ fun MainShell(
                     profileName = profileName,
                     completedTopics = completedTopics,
                     lastTopicId = lastTopicId,
+                    bookmarkCount = bookmarks.size,
                     onOpenPaper = { navController.navigate(Routes.paperTopics(it)) },
-                    onOpenTopic = { navController.navigate(Routes.topicDetail(it)) }
+                    onOpenTopic = { navController.navigate(Routes.topicDetail(it)) },
+                    onOpenSearch = { navController.navigate(Routes.SEARCH) },
+                    onOpenBookmarks = { navController.navigate(Routes.BOOKMARKS) }
                 )
             }
             composable(Routes.PAPERS) {
                 PapersScreen(
                     strings = strings,
                     completedTopics = completedTopics,
-                    onOpenPaper = { navController.navigate(Routes.paperTopics(it)) }
+                    bookmarkCount = bookmarks.size,
+                    onOpenPaper = { navController.navigate(Routes.paperTopics(it)) },
+                    onOpenSearch = { navController.navigate(Routes.SEARCH) },
+                    onOpenBookmarks = { navController.navigate(Routes.BOOKMARKS) }
+                )
+            }
+            composable(Routes.SEARCH) {
+                SearchScreen(
+                    strings = strings,
+                    isUrdu = isUrdu,
+                    content = contentState,
+                    onOpenTopic = { navController.navigate(Routes.topicDetail(it)) },
+                    onBack = { navController.popBackStack() }
+                )
+            }
+            composable(Routes.BOOKMARKS) {
+                BookmarksScreen(
+                    strings = strings,
+                    isUrdu = isUrdu,
+                    bookmarks = bookmarks,
+                    onOpenTopic = { navController.navigate(Routes.topicDetail(it)) },
+                    onRemoveBookmark = onToggleBookmark,
+                    onBack = { navController.popBackStack() }
                 )
             }
             composable(Routes.PRACTICE) {
@@ -127,7 +158,9 @@ fun MainShell(
                     isUrdu = isUrdu,
                     onUrduChange = onUrduChange,
                     darkMode = darkMode,
-                    onDarkModeChange = onDarkModeChange
+                    onDarkModeChange = onDarkModeChange,
+                    fontScale = fontScale,
+                    onFontScaleChange = onFontScaleChange
                 )
             }
             composable(
@@ -140,6 +173,7 @@ fun MainShell(
                     isUrdu = isUrdu,
                     paperId = paperId,
                     completedTopics = completedTopics,
+                    bookmarks = bookmarks,
                     onOpenTopic = { navController.navigate(Routes.topicDetail(it)) },
                     onBack = { navController.popBackStack() }
                 )
@@ -160,7 +194,11 @@ fun MainShell(
                         topic = topic,
                         content = contentState,
                         completed = topic.id in completedTopics,
+                        bookmarked = topic.id in bookmarks,
+                        fontScale = fontScale,
                         onToggleCompleted = { onTopicCompletedChange(topic.id, it) },
+                        onToggleBookmark = { onToggleBookmark(topic.id) },
+                        onFontScaleChange = onFontScaleChange,
                         onBack = { navController.popBackStack() }
                     )
                 }

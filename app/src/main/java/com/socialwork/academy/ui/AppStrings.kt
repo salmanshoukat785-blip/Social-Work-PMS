@@ -61,8 +61,32 @@ data class AppStrings(
     val noSourcePoints: String,
     // Content (Phase 4)
     val sourceLabel: String,
-    val contentError: String
+    val contentError: String,
+    // Reader, search, bookmarks (Phase 5)
+    val searchTitle: String,
+    val searchHint: String,
+    val searchPrompt: String,
+    val noResults: String,
+    val matchesFormat: String,
+    val bookmarksTitle: String,
+    val noBookmarks: String,
+    val bookmarkAdd: String,
+    val bookmarkRemove: String,
+    val copyLabel: String,
+    val shareLabel: String,
+    val copiedMessage: String,
+    val textSizeLabel: String,
+    val textSizeSample: String,
+    val smallerText: String,
+    val largerText: String,
+    val savedCountFormat: String
 ) {
+    /** "3 matches in notes" */
+    fun matches(n: Int): String = matchesFormat.replace("{n}", n.toString())
+
+    /** "4 saved" */
+    fun savedCount(n: Int): String = savedCountFormat.replace("{n}", n.toString())
+
     fun welcomeName(name: String): String = welcomeNameFormat.replace("%s", name)
 
     /** "3 of 37 topics completed" */
@@ -83,7 +107,10 @@ data class AppStrings(
         profileTitle, profileHint, nameLabel, institutionLabel, skipForNow,
         statPapers, statTopics, statCompleted, statRemaining, progressTitle, progressFormat,
         continueLearning, noProgressYet, paperSummaryFormat,
-        markCompleted, markNotCompleted, noSourcePoints, sourceLabel, contentError
+        markCompleted, markNotCompleted, noSourcePoints, sourceLabel, contentError,
+        searchTitle, searchHint, searchPrompt, noResults, matchesFormat, bookmarksTitle,
+        noBookmarks, bookmarkAdd, bookmarkRemove, copyLabel, shareLabel, copiedMessage,
+        textSizeLabel, textSizeSample, smallerText, largerText, savedCountFormat
     )
 
     companion object {
@@ -138,7 +165,24 @@ data class AppStrings(
             markNotCompleted = "Completed - tap to undo",
             noSourcePoints = "The Word file has no separate points under this heading.",
             sourceLabel = "Source: Social Work Paper 1 & 2 (Word file)",
-            contentError = "The study content could not be loaded."
+            contentError = "The study content could not be loaded.",
+            searchTitle = "Search",
+            searchHint = "Search topics and notes",
+            searchPrompt = "Type at least 2 letters to search all topics and notes.",
+            noResults = "No results found.",
+            matchesFormat = "{n} matches in notes",
+            bookmarksTitle = "Bookmarks",
+            noBookmarks = "You have not bookmarked any topic yet. Open a topic and tap the bookmark icon.",
+            bookmarkAdd = "Add bookmark",
+            bookmarkRemove = "Remove bookmark",
+            copyLabel = "Copy",
+            shareLabel = "Share",
+            copiedMessage = "Copied",
+            textSizeLabel = "Reading text size",
+            textSizeSample = "Sample text: Social Work",
+            smallerText = "Smaller text",
+            largerText = "Larger text",
+            savedCountFormat = "{n} saved"
         )
 
         val Urdu = AppStrings(
@@ -192,7 +236,24 @@ data class AppStrings(
             markNotCompleted = "مکمل - واپس کرنے کے لیے دبائیں",
             noSourcePoints = "ورڈ فائل میں اس عنوان کے تحت الگ نکات موجود نہیں۔",
             sourceLabel = "ماخذ: سوشل ورک پرچہ 1 اور 2 (ورڈ فائل)",
-            contentError = "مطالعے کا مواد لوڈ نہیں ہو سکا۔"
+            contentError = "مطالعے کا مواد لوڈ نہیں ہو سکا۔",
+            searchTitle = "تلاش",
+            searchHint = "موضوعات اور نوٹس میں تلاش کریں",
+            searchPrompt = "تمام موضوعات اور نوٹس میں تلاش کے لیے کم از کم 2 حروف لکھیں۔",
+            noResults = "کوئی نتیجہ نہیں ملا۔",
+            matchesFormat = "نوٹس میں {n} نتائج",
+            bookmarksTitle = "بک مارکس",
+            noBookmarks = "آپ نے ابھی کوئی موضوع بک مارک نہیں کیا۔ کوئی موضوع کھول کر بک مارک کا آئیکن دبائیں۔",
+            bookmarkAdd = "بک مارک کریں",
+            bookmarkRemove = "بک مارک ہٹائیں",
+            copyLabel = "کاپی",
+            shareLabel = "شیئر",
+            copiedMessage = "کاپی ہو گیا",
+            textSizeLabel = "پڑھنے کے متن کا سائز",
+            textSizeSample = "نمونہ متن: سوشل ورک",
+            smallerText = "متن چھوٹا کریں",
+            largerText = "متن بڑا کریں",
+            savedCountFormat = "{n} محفوظ"
         )
     }
 }

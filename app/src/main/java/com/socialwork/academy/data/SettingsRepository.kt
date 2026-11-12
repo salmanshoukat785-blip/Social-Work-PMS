@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
+import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
@@ -27,7 +28,11 @@ data class UserSettings(
     /** IDs of topics the user marked as completed. */
     val completedTopics: Set<String> = emptySet(),
     /** The topic the user opened most recently (for "Continue learning"). */
-    val lastTopicId: String? = null
+    val lastTopicId: String? = null,
+    /** IDs of topics the user bookmarked. */
+    val bookmarks: Set<String> = emptySet(),
+    /** Reading text size (one of FontScale.steps). */
+    val fontScale: Float = FontScale.DEFAULT
 )
 
 class SettingsRepository(context: Context) {
@@ -46,7 +51,9 @@ class SettingsRepository(context: Context) {
                 profileName = prefs[KEY_NAME] ?: "",
                 institution = prefs[KEY_INSTITUTION] ?: "",
                 completedTopics = prefs[KEY_COMPLETED] ?: emptySet(),
-                lastTopicId = prefs[KEY_LAST_TOPIC]
+                lastTopicId = prefs[KEY_LAST_TOPIC],
+                bookmarks = prefs[KEY_BOOKMARKS] ?: emptySet(),
+                fontScale = prefs[KEY_FONT_SCALE] ?: FontScale.DEFAULT
             )
         }
 
@@ -83,6 +90,18 @@ class SettingsRepository(context: Context) {
         store.edit { it[KEY_LAST_TOPIC] = topicId }
     }
 
+    /** Adds the topic to the bookmarks, or removes it if it is already there. */
+    suspend fun toggleBookmark(topicId: String) {
+        store.edit {
+            val current = it[KEY_BOOKMARKS] ?: emptySet()
+            it[KEY_BOOKMARKS] = if (topicId in current) current - topicId else current + topicId
+        }
+    }
+
+    suspend fun setFontScale(value: Float) {
+        store.edit { it[KEY_FONT_SCALE] = value }
+    }
+
     private companion object {
         val KEY_URDU = booleanPreferencesKey("is_urdu")
         val KEY_DARK = booleanPreferencesKey("dark_mode")
@@ -91,5 +110,7 @@ class SettingsRepository(context: Context) {
         val KEY_INSTITUTION = stringPreferencesKey("profile_institution")
         val KEY_COMPLETED = stringSetPreferencesKey("completed_topics")
         val KEY_LAST_TOPIC = stringPreferencesKey("last_topic")
+        val KEY_BOOKMARKS = stringSetPreferencesKey("bookmarks")
+        val KEY_FONT_SCALE = floatPreferencesKey("font_scale")
     }
 }

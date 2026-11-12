@@ -16,6 +16,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -39,6 +40,7 @@ fun PaperTopicsScreen(
     isUrdu: Boolean,
     paperId: Int,
     completedTopics: Set<String>,
+    bookmarks: Set<String>,
     onOpenTopic: (String) -> Unit,
     onBack: () -> Unit,
     modifier: Modifier = Modifier
@@ -69,6 +71,7 @@ fun PaperTopicsScreen(
                     topic = topic,
                     isUrdu = isUrdu,
                     completed = topic.id in completedTopics,
+                    bookmarked = topic.id in bookmarks,
                     onClick = { onOpenTopic(topic.id) }
                 )
             }
@@ -82,6 +85,7 @@ private fun TopicRow(
     topic: Topic,
     isUrdu: Boolean,
     completed: Boolean,
+    bookmarked: Boolean,
     onClick: () -> Unit
 ) {
     Card(
@@ -118,6 +122,13 @@ private fun TopicRow(
                     text = topic.otherTitle(isUrdu),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+            if (bookmarked) {
+                Icon(
+                    imageVector = Icons.Filled.Bookmark,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.secondary
                 )
             }
             if (completed) {

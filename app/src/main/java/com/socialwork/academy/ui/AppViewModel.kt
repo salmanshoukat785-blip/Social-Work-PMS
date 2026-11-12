@@ -41,4 +41,12 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     fun setLastTopic(topicId: String) {
         viewModelScope.launch { repository.setLastTopic(topicId) }
     }
+
+    fun toggleBookmark(topicId: String) {
+        viewModelScope.launch { repository.toggleBookmark(topicId) }
+    }
+
+    fun setFontScale(value: Float) {
+        viewModelScope.launch { repository.setFontScale(value) }
+    }
 }
