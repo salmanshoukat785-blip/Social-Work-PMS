@@ -100,10 +100,14 @@ fun AcademyApp(viewModel: AppViewModel = viewModel()) {
                         MainShell(
                             strings = strings,
                             profileName = settings?.profileName ?: "",
+                            completedTopics = settings?.completedTopics ?: emptySet(),
+                            lastTopicId = settings?.lastTopicId,
                             isUrdu = isUrdu,
                             onUrduChange = { viewModel.setUrdu(it) },
                             darkMode = darkMode,
-                            onDarkModeChange = { viewModel.setDarkMode(it) }
+                            onDarkModeChange = { viewModel.setDarkMode(it) },
+                            onTopicOpened = { viewModel.setLastTopic(it) },
+                            onTopicCompletedChange = { id, done -> viewModel.setTopicCompleted(id, done) }
                         )
                     }
                 }

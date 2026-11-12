@@ -33,4 +33,12 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
     fun finishSetupWithoutProfile() {
         viewModelScope.launch { repository.finishSetupWithoutProfile() }
     }
+
+    fun setTopicCompleted(topicId: String, completed: Boolean) {
+        viewModelScope.launch { repository.setTopicCompleted(topicId, completed) }
+    }
+
+    fun setLastTopic(topicId: String) {
+        viewModelScope.launch { repository.setLastTopic(topicId) }
+    }
 }

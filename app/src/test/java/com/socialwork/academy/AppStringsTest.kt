@@ -29,6 +29,18 @@ class AppStringsTest {
     }
 
     @Test
+    fun progressTextsInsertTheNumbers() {
+        listOf(AppStrings.English, AppStrings.Urdu).forEach {
+            val progress = it.progressSummary(3, 37)
+            assertTrue(progress.contains("3") && progress.contains("37"))
+            assertTrue(!progress.contains("{"))
+            val paper = it.paperSummary(15, 2)
+            assertTrue(paper.contains("15") && paper.contains("2"))
+            assertTrue(!paper.contains("{"))
+        }
+    }
+
+    @Test
     fun welcomeNameInsertsTheName() {
         assertTrue(AppStrings.English.welcomeName("Ali").contains("Ali"))
         assertTrue(AppStrings.Urdu.welcomeName("علی").contains("علی"))

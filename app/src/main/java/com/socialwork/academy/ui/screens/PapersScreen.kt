@@ -14,14 +14,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.socialwork.academy.data.TopicCatalog
+import com.socialwork.academy.data.progressFor
 import com.socialwork.academy.ui.AppStrings
 
 @Composable
 fun PapersScreen(
     strings: AppStrings,
+    completedTopics: Set<String>,
     onOpenPaper: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val paper1 = progressFor(TopicCatalog.paper1, completedTopics)
+    val paper2 = progressFor(TopicCatalog.paper2, completedTopics)
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -32,13 +38,13 @@ fun PapersScreen(
         Text(text = strings.papersTitle, style = MaterialTheme.typography.titleLarge)
         PaperCard(
             title = strings.paper1,
-            subtitle = strings.paper1Sub,
+            subtitle = strings.paper1Sub + "\n" + strings.paperSummary(paper1.total, paper1.completed),
             icon = Icons.Filled.AccountBalance,
             onClick = { onOpenPaper(1) }
         )
         PaperCard(
             title = strings.paper2,
-            subtitle = strings.paper2Sub,
+            subtitle = strings.paper2Sub + "\n" + strings.paperSummary(paper2.total, paper2.completed),
             icon = Icons.AutoMirrored.Filled.MenuBook,
             onClick = { onOpenPaper(2) }
         )

@@ -15,8 +15,13 @@ object Routes {
     const val PRACTICE = "practice"
     const val SETTINGS = "settings"
 
+    // Paper -> topic list -> topic detail
     const val PAPER_ARG = "paperId"
-    const val PAPER_DETAIL = "paper/{$PAPER_ARG}"
+    const val PAPER_TOPICS = "paper/{$PAPER_ARG}"
 
-    fun paperDetail(paperId: Int) = "paper/$paperId"
+    const val TOPIC_ARG = "topicId"
+    const val TOPIC_DETAIL = "topic/{$TOPIC_ARG}"
+
+    fun paperTopics(paperId: Int) = "paper/$paperId"
+    fun topicDetail(topicId: String) = "topic/$topicId"
 }

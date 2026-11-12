@@ -7,6 +7,7 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -15,14 +16,18 @@ import java.io.IOException
 
 private val Context.settingsDataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
-/** Everything the app remembers about the user's choices. All stored on the phone only. */
+/** Everything the app remembers about the user's choices and activity. All stored on the phone only. */
 data class UserSettings(
     val isUrdu: Boolean = false,
     /** null = follow the phone's light/dark setting until the user picks one. */
     val darkMode: Boolean? = null,
     val setupDone: Boolean = false,
     val profileName: String = "",
-    val institution: String = ""
+    val institution: String = "",
+    /** IDs of topics the user marked as completed. */
+    val completedTopics: Set<String> = emptySet(),
+    /** The topic the user opened most recently (for "Continue learning"). */
+    val lastTopicId: String? = null
 )
 
 class SettingsRepository(context: Context) {
@@ -39,7 +44,9 @@ class SettingsRepository(context: Context) {
                 darkMode = prefs[KEY_DARK],
                 setupDone = prefs[KEY_SETUP_DONE] ?: false,
                 profileName = prefs[KEY_NAME] ?: "",
-                institution = prefs[KEY_INSTITUTION] ?: ""
+                institution = prefs[KEY_INSTITUTION] ?: "",
+                completedTopics = prefs[KEY_COMPLETED] ?: emptySet(),
+                lastTopicId = prefs[KEY_LAST_TOPIC]
             )
         }
 
@@ -65,11 +72,24 @@ class SettingsRepository(context: Context) {
         store.edit { it[KEY_SETUP_DONE] = true }
     }
 
+    suspend fun setTopicCompleted(topicId: String, completed: Boolean) {
+        store.edit {
+            val current = it[KEY_COMPLETED] ?: emptySet()
+            it[KEY_COMPLETED] = if (completed) current + topicId else current - topicId
+        }
+    }
+
+    suspend fun setLastTopic(topicId: String) {
+        store.edit { it[KEY_LAST_TOPIC] = topicId }
+    }
+
     private companion object {
         val KEY_URDU = booleanPreferencesKey("is_urdu")
         val KEY_DARK = booleanPreferencesKey("dark_mode")
         val KEY_SETUP_DONE = booleanPreferencesKey("setup_done")
         val KEY_NAME = stringPreferencesKey("profile_name")
         val KEY_INSTITUTION = stringPreferencesKey("profile_institution")
+        val KEY_COMPLETED = stringSetPreferencesKey("completed_topics")
+        val KEY_LAST_TOPIC = stringPreferencesKey("last_topic")
     }
 }

@@ -24,7 +24,6 @@ data class AppStrings(
     val languageLabel: String,
     val darkModeLabel: String,
     val offlineNote: String,
-    val comingLater: String,
     val back: String,
     // Onboarding
     val ob1Title: String,
@@ -45,18 +44,43 @@ data class AppStrings(
     val profileHint: String,
     val nameLabel: String,
     val institutionLabel: String,
-    val skipForNow: String
+    val skipForNow: String,
+    // Dashboard (Phase 3)
+    val statPapers: String,
+    val statTopics: String,
+    val statCompleted: String,
+    val statRemaining: String,
+    val progressTitle: String,
+    val progressFormat: String,
+    val continueLearning: String,
+    val noProgressYet: String,
+    val paperSummaryFormat: String,
+    // Topic screens (Phase 3)
+    val markCompleted: String,
+    val markNotCompleted: String,
+    val topicNotesLater: String
 ) {
     fun welcomeName(name: String): String = welcomeNameFormat.replace("%s", name)
+
+    /** "3 of 37 topics completed" */
+    fun progressSummary(done: Int, total: Int): String =
+        progressFormat.replace("{done}", done.toString()).replace("{total}", total.toString())
+
+    /** "15 topics - 2 completed" */
+    fun paperSummary(total: Int, done: Int): String =
+        paperSummaryFormat.replace("{done}", done.toString()).replace("{total}", total.toString())
 
     /** Every text in this language; used by the unit test to catch blanks. */
     fun all(): List<String> = listOf(
         appName, tabHome, tabPapers, tabPractice, tabSettings, welcome, welcomeNameFormat,
         tagline, paper1, paper2, paper1Sub, paper2Sub, papersTitle, practiceTitle,
         practiceBody, settingsTitle, languageLabel, darkModeLabel, offlineNote,
-        comingLater, back, ob1Title, ob1Body, ob2Title, ob2Body, ob3Title, ob3Body,
+        back, ob1Title, ob1Body, ob2Title, ob2Body, ob3Title, ob3Body,
         next, skip, getStarted, chooseLanguage, languageHint, continueLabel,
-        profileTitle, profileHint, nameLabel, institutionLabel, skipForNow
+        profileTitle, profileHint, nameLabel, institutionLabel, skipForNow,
+        statPapers, statTopics, statCompleted, statRemaining, progressTitle, progressFormat,
+        continueLearning, noProgressYet, paperSummaryFormat,
+        markCompleted, markNotCompleted, topicNotesLater
     )
 
     companion object {
@@ -80,7 +104,6 @@ data class AppStrings(
             languageLabel = "Urdu (اردو)",
             darkModeLabel = "Dark mode",
             offlineNote = "This app works without internet.",
-            comingLater = "Topics and notes will appear here in a later phase.",
             back = "Back",
             ob1Title = "Study Paper 1 and Paper 2",
             ob1Body = "Topic-wise notes in English and Urdu, arranged the way your course is.",
@@ -98,7 +121,19 @@ data class AppStrings(
             profileHint = "Saved only on this phone. No account needed.",
             nameLabel = "Name",
             institutionLabel = "College / University (optional)",
-            skipForNow = "Skip for now"
+            skipForNow = "Skip for now",
+            statPapers = "Papers",
+            statTopics = "Topics",
+            statCompleted = "Completed",
+            statRemaining = "Remaining",
+            progressTitle = "Your progress",
+            progressFormat = "{done} of {total} topics completed",
+            continueLearning = "Continue learning",
+            noProgressYet = "Open a topic from Paper 1 or Paper 2 to start learning.",
+            paperSummaryFormat = "{total} topics - {done} completed",
+            markCompleted = "Mark as completed",
+            markNotCompleted = "Completed - tap to undo",
+            topicNotesLater = "The notes for this topic will appear here in a later phase."
         )
 
         val Urdu = AppStrings(
@@ -121,7 +156,6 @@ data class AppStrings(
             languageLabel = "اردو (Urdu)",
             darkModeLabel = "ڈارک موڈ",
             offlineNote = "یہ ایپ انٹرنیٹ کے بغیر چلتی ہے۔",
-            comingLater = "موضوعات اور نوٹس بعد کے مرحلے میں یہاں نظر آئیں گے۔",
             back = "واپس",
             ob1Title = "پرچہ اول اور پرچہ دوم کی تیاری",
             ob1Body = "انگریزی اور اردو میں موضوع وار نوٹس، آپ کے کورس کی ترتیب کے مطابق۔",
@@ -139,7 +173,19 @@ data class AppStrings(
             profileHint = "صرف اسی فون میں محفوظ ہوتا ہے۔ اکاؤنٹ کی ضرورت نہیں۔",
             nameLabel = "نام",
             institutionLabel = "کالج / یونیورسٹی (اختیاری)",
-            skipForNow = "ابھی چھوڑیں"
+            skipForNow = "ابھی چھوڑیں",
+            statPapers = "پرچے",
+            statTopics = "موضوعات",
+            statCompleted = "مکمل",
+            statRemaining = "باقی",
+            progressTitle = "آپ کی پیش رفت",
+            progressFormat = "{total} میں سے {done} موضوعات مکمل",
+            continueLearning = "پڑھائی جاری رکھیں",
+            noProgressYet = "پڑھائی شروع کرنے کے لیے پرچہ اول یا پرچہ دوم سے کوئی موضوع کھولیں۔",
+            paperSummaryFormat = "{total} موضوعات - {done} مکمل",
+            markCompleted = "مکمل کے طور پر نشان زد کریں",
+            markNotCompleted = "مکمل - واپس کرنے کے لیے دبائیں",
+            topicNotesLater = "اس موضوع کے نوٹس بعد کے مرحلے میں یہاں نظر آئیں گے۔"
         )
     }
 }
