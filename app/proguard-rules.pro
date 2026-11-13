@@ -1,1 +1,1 @@
-# Project-specific ProGuard rules (release minification is off in Phase 1)
+# Project-specific ProGuard rules (minify is currently disabled).
