@@ -1,0 +1,1566 @@
+{
+ "version": 1,
+ "source": "Social Work Paper 1 & 2 (Word file)",
+ "topics": [
+  {
+   "id": "p1_society",
+   "sections": []
+  },
+  {
+   "id": "p1_society_characteristics",
+   "sections": [
+    {
+     "headingEn": "",
+     "headingUr": "",
+     "itemsEn": [
+      "Geographical background Geographical features Population",
+      "Male Dominated society Literacy rate",
+      "Religious",
+      "Provincial System's",
+      "Caste system",
+      "Dress-code",
+      "Food-habits",
+      "Islamic Religious",
+      "State Traditions Supersitition & conservatism",
+      "Joint Family system",
+      "Social change Professions Status of woman",
+      "Social norms & values Leadership"
+     ],
+     "itemsUr": [
+      "جغرافیائی پس منظر۔جغرافیائی خدوخال۔آبادی",
+      "مردانہ تسلط والا معاشرہ",
+      "خواندگی کی شرح",
+      "مذہبی",
+      "صوبائی نظام",
+      "ذات پات کا نظام",
+      "لباس کا انداز",
+      "کھانے کی عادات",
+      "اسلامی مذہبی",
+      "ریاستی روایات"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p1_europe_impact",
+   "sections": [
+    {
+     "headingEn": "",
+     "headingUr": "",
+     "itemsEn": [
+      "Historical background",
+      "Change in social norm",
+      "Feudal system",
+      "Recreation",
+      "English Language",
+      "Decline of religious culture",
+      "Architect",
+      "Missionaries",
+      "Material culture",
+      "Conclusion",
+      "Industrialization",
+      "Change in professions",
+      "Materialism",
+      "Judicial system",
+      "Infrastructure development",
+      "Irrigation system"
+     ],
+     "itemsUr": [
+      "تاریخی پس منظر",
+      "سماجی اقدار میں تبدیلی",
+      "جاگیردارانہ نظام",
+      "تفریح",
+      "انگریزی زبان",
+      "مذہبی ثقافت کا زوال",
+      "فن تعمیر",
+      "مشنریز",
+      "مادی ثقافت",
+      "صنعتی کاری",
+      "پیشوں میں تبدیلی",
+      "مادیت پرستی",
+      "عدلیہ کا نظام",
+      "بنیادی ڈھانچے کی ترقی",
+      "آبپاشی کا نظام"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p1_culture_characteristics",
+   "sections": [
+    {
+     "headingEn": "",
+     "headingUr": "",
+     "itemsEn": [
+      "Islamic culture",
+      "Respect of mankind",
+      "Veil / pardah",
+      "Status of women",
+      "Masjid",
+      "Architect Islamic",
+      "Beliefs Civilized",
+      "Hard working",
+      "Skilled Person",
+      "Brave people",
+      "Fine Arts",
+      "Language Differences",
+      "Festivals, Education &",
+      "Muslim Brotherhood"
+     ],
+     "itemsUr": [
+      "اسلامی ثقافت",
+      "انسانیت کا احترام",
+      "پردہ",
+      "خواتین کا مقام و مرتبہ",
+      "مسجد",
+      "اسلامی فن تعمیر",
+      "مہذب عقائد",
+      "محنتی لوگ",
+      "ماہر افراد",
+      "بہادر لوگ",
+      "فنون لطیفہ",
+      "زبان کے فرق",
+      "، تعلیم",
+      "تہوار",
+      "مسلم بھائی چارہ"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p1_rural_urban",
+   "sections": [
+    {
+     "headingEn": "",
+     "headingUr": "",
+     "itemsEn": [
+      "Population",
+      "Literacy rate",
+      "Religious attachment",
+      "Caste system",
+      "Dress",
+      "Food habits",
+      "Traditions & Taboos",
+      "Family System Hobbies",
+      "Social change",
+      "Professional",
+      "Unemployment",
+      "Status of women",
+      "Empowerment",
+      "Social norms",
+      "Social mobility Leadership"
+     ],
+     "itemsUr": [
+      "آبادی",
+      "خواندگی کی شرح",
+      "مذہبی لگاؤ",
+      "ذات پات کا نظام",
+      "لباس",
+      "کھانے کی عادات",
+      "روایات اور ممنوعات",
+      "خاندانی نظام",
+      "مشغلے",
+      "معاشرتی تبدیلی",
+      "پیشہ ورانہ امور",
+      "بے روزگاری",
+      "عورت کا مقام و مرتبہ",
+      "بااختیار بنانا",
+      "معاشرتی اقدار",
+      "قیادت",
+      "سماجی نقل و حرکت"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p1_social_institutions",
+   "sections": []
+  },
+  {
+   "id": "p1_family",
+   "sections": [
+    {
+     "headingEn": "",
+     "headingUr": "",
+     "itemsEn": [
+      "Biological functions",
+      "Reproduction",
+      "Breed & brought of child",
+      "Protection and security",
+      "Social & economic needs",
+      "Education & training",
+      "Religious guidance",
+      "Marriage Discipline",
+      "Transformation of protection of cultural heritage",
+      "Social relationship",
+      "Political consciousness",
+      "Recreation"
+     ],
+     "itemsUr": [
+      "حیاتیاتی افعال",
+      "تولید",
+      "بچوں کی پرورش و پرداخت",
+      "تحفظ اور سلامتی",
+      "سماجی اور معاشی ضروریات",
+      "تعلیم اور تربیت",
+      "مذہبی رہنمائی",
+      "شادی اور نظم و ضبط",
+      "ثقافتی ورثے کی منتقلی اور حفاظت",
+      "سماجی تعلقات",
+      "سیاسی شعور",
+      "تفریح"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p1_religious_institutions",
+   "sections": [
+    {
+     "headingEn": "",
+     "headingUr": "",
+     "itemsEn": [
+      "Metaphysical concept",
+      "Guideline to character",
+      "Self-esteem & confidence",
+      "Spiritual needs",
+      "Social control",
+      "Welfare",
+      "Reformation",
+      "Unity",
+      "Recreation",
+      "Correction of social institutions"
+     ],
+     "itemsUr": [
+      "مابعدالطبیعاتی تصور",
+      "کردار کی رہنمائی",
+      "خود اعتمادی اور اعتماد",
+      "روحانی ضروریات",
+      "سماجی کنٹرول",
+      "فلاح و بہبود",
+      "اصلاح",
+      "اتحاد",
+      "تفریح",
+      "معاشرتی اداروں کی اصلاح"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p1_educational_institutions",
+   "sections": [
+    {
+     "headingEn": "",
+     "headingUr": "",
+     "itemsEn": [
+      "Protection of cultural heritage",
+      "Reconstruction of cultural",
+      "Socialization of individuals",
+      "Provision of skilled manpower",
+      "Inventions & discoveries",
+      "Civic sense",
+      "Social development",
+      "Social change",
+      "Solidarity",
+      "Coordination & corporation",
+      "Rights & Duties Discipline"
+     ],
+     "itemsUr": [
+      "ثقافتی ورثے کا تحفظ",
+      "ثقافت کی تشکیلِ نو",
+      "افراد کی سماجی کاری",
+      "ماہر افرادی قوت کی فراہمی",
+      "ایجادات اور دریافتیں",
+      "شہری شعور",
+      "سماجی ترقی",
+      "معاشرتی تبدیلی",
+      "یکجہتی",
+      "ہم آہنگی اور تعاون",
+      "حقوق اور فرائض کا نظم و ضبط"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p1_economic_institutions",
+   "sections": [
+    {
+     "headingEn": "",
+     "headingUr": "",
+     "itemsEn": [
+      "Provision of goods & services",
+      "Regulation and cont of services& goods",
+      "Provision of labour",
+      "Division of labour",
+      "Social satisfaction",
+      "Social relations",
+      "Dependency",
+      "Social status",
+      "Personality development",
+      "Role in politics"
+     ],
+     "itemsUr": [
+      "اشیاء اور خدمات کی فراہمی",
+      "اشیاء اور خدمات کا ضابطہ اور کنٹرول",
+      "محنت کی فراہمی",
+      "محنت کی تقسیم",
+      "سماجی تسکین",
+      "سماجی تعلقات",
+      "انحصار",
+      "سماجی مقام و حیثیت",
+      "شخصیت کی نشوونما",
+      "سیاست میں کردار"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p1_norms_socialization",
+   "sections": [
+    {
+     "headingEn": "Factor Of Socialization",
+     "headingUr": "سماجی کاری کے عوامل",
+     "itemsEn": [
+      "Undefined Acts",
+      "Folkways",
+      "Mores",
+      "Laws",
+      "Family",
+      "Peer Group",
+      "Religious",
+      "Education institutions",
+      "Mass – Media & Communication"
+     ],
+     "itemsUr": [
+      "غیر واضح اعمال",
+      "رسوم و رواج",
+      "اخلاقیات",
+      "قوانین",
+      "خاندان",
+      "ہم عمر گروہ",
+      "مذہبی ادارے",
+      "تعلیمی ادارے",
+      "ماس میڈیا اور مواصلات"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p1_importance_institutions",
+   "sections": [
+    {
+     "headingEn": "",
+     "headingUr": "",
+     "itemsEn": [
+      "To Reduce Poverty",
+      "To Upgrade Economy",
+      "To Stable Economy",
+      "To Reduce Foreign Debt",
+      "To Control Population",
+      "To Control Unemployment",
+      "To Provide Justice",
+      "To Facilitate Public For National Growth",
+      "To Provide Basic Nacasity of Life"
+     ],
+     "itemsUr": [
+      "غربت کا خاتمہ",
+      "معیشت کو بہتر بنانا",
+      "معیشت کو استحکام دینا",
+      "غیر ملکی قرضوں میں کمی",
+      "آبادی پر قابو پانا",
+      "بے روزگاری پر قابو پانا",
+      "انصاف کی فراہمی",
+      "قومی ترقی کے لیے عوام کی سہولت کاری",
+      "زندگی کی بنیادی ضروریات کی فراہمی"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p1_social_problems",
+   "sections": [
+    {
+     "headingEn": "Topics",
+     "headingUr": "موضوعات",
+     "itemsEn": [
+      "Over Population",
+      "Corruption Energy crises",
+      "Illiteracy",
+      "Terrorism",
+      "Poverty",
+      "Inflation",
+      "Health sector problems",
+      "Child labour",
+      "Violence against Women",
+      "Political instability",
+      "Unemployment",
+      "Crimes & Law and order",
+      "Intolerance",
+      "Beggary"
+     ],
+     "itemsUr": [
+      "حد سے زیادہ آبادی",
+      "بدعنوانی اور توانائی کا بحران",
+      "ناخواندگی",
+      "دہشت گردی",
+      "غربت",
+      "مہنگائی",
+      "صحت کے شعبے کے مسائل",
+      "بچوں سے مزدوری",
+      "خواتین پر تشدد",
+      "سیاسی عدم استحکام",
+      "جرائم اور امن و امان",
+      "عدم برداشت",
+      "گداگری"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p1_social_changes",
+   "sections": [
+    {
+     "headingEn": "Social Changes in Society",
+     "headingUr": "معاشرے میں معاشرتی تبدیلیاں",
+     "itemsEn": [
+      "Inventions",
+      "Discoveries",
+      "Diffusion",
+      "Fashion",
+      "Education Boost Up",
+      "Health Facilities",
+      "Social institutions",
+      "Modernism",
+      "Physical environment",
+      "Social movements",
+      "Social mobility",
+      "Population",
+      "Expansion in cultural element",
+      "Continuity in cultural components",
+      "Mass media",
+      "Natural resources",
+      "Destruction"
+     ],
+     "itemsUr": [
+      "ایجادات",
+      "دریافتیں",
+      "پھیلاؤ (Diffusion)",
+      "فیشن",
+      "تعلیم کا فروغ",
+      "صحت کی سہولیات",
+      "معاشرتی ادارے",
+      "جدیدیت",
+      "طبعی ماحول",
+      "سماجی تحریکیں",
+      "سماجی نقل و حرکت",
+      "آبادی",
+      "ثقافتی عناصر میں توسیع",
+      "ثقافتی اجزاء کا تسلسل",
+      "ماس میڈیا",
+      "قدرتی وسائل",
+      "تباہی"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p1_barriers",
+   "sections": [
+    {
+     "headingEn": "",
+     "headingUr": "",
+     "itemsEn": [
+      "Customs & taboos Ignorance/",
+      "Literacy Poverty",
+      "Under privileged social setup",
+      "Underprivileged means of communication / Transportation",
+      "Vested interests",
+      "Hesitation in accepting invention",
+      "Habits",
+      "Rigidity in thoughts & attitude",
+      "Geographical location",
+      "Ethnicity Jingoism"
+     ],
+     "itemsUr": [
+      "رسم و رواج اور ممنوعات",
+      "جہالت / ناخواندگی",
+      "غربت",
+      "پس ماندہ معاشرتی ڈھانچہ",
+      "مواصلات / نقل و حمل کے پس ماندہ ذرائع",
+      "ذاتی مفادات",
+      "نئی ایجادات کو قبول کرنے میں ہچکچاہٹ",
+      "عادات",
+      "سوچ اور رویے میں سختی",
+      "جغرافیائی محل وقوع",
+      "عصبیت اور انتہا پسندانہ قوم پرستی"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p2_philosophy",
+   "sections": [
+    {
+     "headingEn": "Philosophy Depends",
+     "headingUr": "فلسفہ کا انحصار",
+     "itemsEn": [
+      "Help",
+      "Community",
+      "Society",
+      "Welfare",
+      "Human Development",
+      "Social Work Practice",
+      "Social Work Profession",
+      "Social Work Institution's"
+     ],
+     "itemsUr": [
+      "مدد",
+      "کمیونٹی",
+      "معاشرہ",
+      "فلاح و بہبود",
+      "انسانی ترقی",
+      "سوشل ورک پریکٹس",
+      "سوشل ورک کا پیشہ",
+      "سوشل ورک کے ادارے"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p2_objectives",
+   "sections": [
+    {
+     "headingEn": "",
+     "headingUr": "",
+     "itemsEn": [
+      "To Provide Justice",
+      "To promote Peace",
+      "The help needy people",
+      "To Provide necessity of life",
+      "To solve problems of humanity",
+      "To promote Education",
+      "To reduce disease's",
+      "To promote health sector",
+      "To work for helpless community",
+      "To help the voiceless person's",
+      "To Control Child Labor",
+      "To Provide Justice to women's",
+      "To uplift Economic condition",
+      "Awareness about the Problems",
+      "Self-Help And Self-Reliance",
+      "Eradication Of Useless Taboos"
+     ],
+     "itemsUr": [
+      "انصاف فراہم کرنا",
+      "امن کو فروغ دینا",
+      "ضرورت مند لوگوں کی مدد کرنا",
+      "زندگی کی بنیادی ضرورتیں فراہم کرنا",
+      "انسانیت کے مسائل حل کرنا",
+      "تعلیم کو فروغ دینا",
+      "بیماریوں کو کم کرنا",
+      "صحت کے شعبے کو فروغ دینا",
+      "بے سہارا کمیونٹی کے لیے کام کرنا",
+      "بے آواز افراد کی مدد کرنا",
+      "بچوں کی مشقت کو کنٹرول کرنا",
+      "خواتین کو انصاف فراہم کرنا",
+      "معاشی حالت کو بہتر بنانا",
+      "مسائل کے بارے میں آگاہی",
+      "خود مدد اور خود انحصاری",
+      "فرسودہ توہم پرستی کا خاتمہ"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p2_principles",
+   "sections": [
+    {
+     "headingEn": "",
+     "headingUr": "",
+     "itemsEn": [
+      "Acceptance",
+      "Objectivity",
+      "Confidentiality",
+      "Participation",
+      "Access to Resources Communication",
+      "Self-Awareness",
+      "Determination",
+      "Social Justice",
+      "Social Policies",
+      "Values & Ethics",
+      "Professional identity"
+     ],
+     "itemsUr": [
+      "قبولیت",
+      "معروضیت",
+      "رازداری",
+      "شرکت",
+      "وسائل تک رسائی",
+      "مواصلات",
+      "خود آگاہی",
+      "خود ارادیت",
+      "سماجی انصاف",
+      "سماجی پالیسیاں",
+      "اقدار اور اخلاقیات",
+      "پیشہ ورانہ شناخت"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p2_professional_voluntary",
+   "sections": [
+    {
+     "headingEn": "",
+     "headingUr": "",
+     "itemsEn": [
+      "Education",
+      "Training",
+      "Funds",
+      "Principles",
+      "Code Of Ethics",
+      "Basic Philosophy",
+      "Methods Of Social Work",
+      "Equality",
+      "Social Welfare Institutions",
+      "Reliability",
+      "Cooperation Coordination’s",
+      "Restoration Of Society",
+      "Transformation Of Knowledge",
+      "Planning",
+      "Policy Making"
+     ],
+     "itemsUr": [
+      "تعلیم",
+      "تربیت",
+      "فنڈز",
+      "اصول",
+      "ضابطۂ اخلاق",
+      "بنیادی فلسفہ",
+      "سوشل ورک کے طریقے",
+      "مساوات",
+      "سماجی فلاحی ادارے",
+      "قابلِ اعتمادی",
+      "تعاون اور باہمی رابطہ",
+      "معاشرے کی بحالی",
+      "علم کی منتقلی",
+      "منصوبہ بندی",
+      "پالیسی سازی"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p2_islam_social_work",
+   "sections": [
+    {
+     "headingEn": "Social Work Concept",
+     "headingUr": "سوشل ورک کا تصور",
+     "itemsEn": [
+      "Islam is the complete code of life",
+      "To help each other",
+      "Zakat system",
+      "Sadaqat",
+      "Holy wars and social welfare",
+      "Charity concept in Islam",
+      "Orphan rights in Islam"
+     ],
+     "itemsUr": [
+      "اسلام ایک مکمل ضابطۂ حیات ہے",
+      "ایک دوسرے کی مدد کرنا",
+      "نظامِ زکوٰۃ",
+      "صدقات",
+      "جہاد اور سماجی فلاح و بہبود",
+      "اسلام میں خیرات کا تصور",
+      "اسلام میں یتیموں کے حقوق"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p2_worth_dignity",
+   "sections": [
+    {
+     "headingEn": "",
+     "headingUr": "",
+     "itemsEn": [
+      "Human dignity",
+      "Honor given by Islam to both man and women",
+      "Humans are the best creation of Allah",
+      "Lesson of respect for all",
+      "Respect for ruler's in Islam",
+      "To follow Allah and his Rasool (P.B.U.H)"
+     ],
+     "itemsUr": [
+      "انسانی وقار",
+      "اسلام میں مرد اور عورت دونوں کی تکریم",
+      "انسان اللہ کی بہترین تخلیق ہے (اشرف المخلوقات)",
+      "سب کے احترام کا درس",
+      "اسلام میں حکمرانوں کا احترام",
+      "اللہ اور اس کے رسول (صلی اللہ علیہ وسلم) کی پیروی کرنا"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p2_islamic_society_responsibility",
+   "sections": [
+    {
+     "headingEn": "",
+     "headingUr": "",
+     "itemsEn": [
+      "To follow the Teaching of Islam",
+      "To follow Allah and his Rasool (P.B.U.H)",
+      "To Provide Justice",
+      "Look after family",
+      "To teach the others",
+      "To preach the Islam",
+      "To help the other's",
+      "To respect your seniors",
+      "To Provide peace in the society"
+     ],
+     "itemsUr": [
+      "اسلامی تعلیمات پر عمل کرنا",
+      "اللہ اور اس کے رسول (صلی اللہ علیہ وسلم) کی پیروی کرنا",
+      "انصاف فراہم کرنا",
+      "خاندان کی دیکھ بھال کرنا",
+      "دوسروں کو تعلیم دینا",
+      "اسلام کی تبلیغ کرنا",
+      "دوسروں کی مدد کرنا",
+      "اپنے بڑوں کا احترام کرنا",
+      "معاشرے میں امن قائم کرنا"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p2_methods",
+   "sections": []
+  },
+  {
+   "id": "p2_primary_methods",
+   "sections": [
+    {
+     "headingEn": "",
+     "headingUr": "",
+     "itemsEn": [
+      "Social Case Work",
+      "Social Group Work",
+      "Community Development"
+     ],
+     "itemsUr": [
+      "سوشل کیس ورک (انفرادی سماجی کام)",
+      "سوشل گروپ ورک (اجتماعی سماجی کام)",
+      "کمیونٹی ڈویلپمنٹ (ترقیِ برادری)"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p2_secondary_methods",
+   "sections": [
+    {
+     "headingEn": "",
+     "headingUr": "",
+     "itemsEn": [
+      "Social Research",
+      "Social Welfare",
+      "Administration",
+      "Social Action"
+     ],
+     "itemsUr": [
+      "سوشل ریسرچ (سماجی تحقیق)",
+      "سوشل ویلفیئر (سماجی فلاح و بہبود)",
+      "ایڈمنسٹریشن (انتظامیہ)",
+      "سوشل ایکشن (سماجی عمل)"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p2_social_relations",
+   "sections": [
+    {
+     "headingEn": "Family / Neighbors / Masjid",
+     "headingUr": "خاندان / پڑوسی / مسجد",
+     "itemsEn": [
+      "Basic Education",
+      "Islamic Education",
+      "Build our Personality",
+      "Socialization Process",
+      "Provide Company of People's",
+      "The best platform to live your life",
+      "Make our beliefs strong and authentic"
+     ],
+     "itemsUr": [
+      "بنیادی تعلیم",
+      "اسلامی تعلیم",
+      "ہماری شخصیت کی تعمیر",
+      "سماجی کاری کا عمل",
+      "لوگوں کی صحبت فراہم کرنا",
+      "زندگی گزارنے کا بہترین پلیٹ فارم",
+      "ہمارے عقائد کو مضبوط اور مستند بنانا"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p2_case_work",
+   "sections": [
+    {
+     "headingEn": "Fields of Social Case Work",
+     "headingUr": "دائرہ کار (فیلڈز)",
+     "itemsEn": [
+      "All Government Institution's",
+      "Private Sector",
+      "Welfare of Crime",
+      "NGO's"
+     ],
+     "itemsUr": [
+      "تمام سرکاری ادارے",
+      "نجی شعبہ",
+      "جرائم کی فلاح و بہبود",
+      "غیر سرکاری تنظیمیں (این جی اوز)"
+     ]
+    },
+    {
+     "headingEn": "Principles",
+     "headingUr": "اصول",
+     "itemsEn": [
+      "Acceptance of Client",
+      "Understand Client",
+      "Hearing of clients issues Carefully",
+      "Facts Finding",
+      "Objectivity",
+      "Understand the emotions",
+      "Privacy",
+      "Self-determination",
+      "Access to resources",
+      "Solution of problems"
+     ],
+     "itemsUr": [
+      "موکل کو تسلیم کرنا",
+      "موکل کو سمجھنا",
+      "موکل کے مسائل کو غور سے سننا",
+      "حقائق کی تلاش",
+      "غیر جانبداری",
+      "جذبات کو سمجھنا",
+      "رازداری",
+      "خود ارادیت",
+      "وسائل تک رسائی",
+      "مسائل کا حل"
+     ]
+    },
+    {
+     "headingEn": "Person",
+     "headingUr": "شخص",
+     "itemsEn": [
+      "Individual under Stress",
+      "Unadjusted in Society",
+      "Seeking Solution",
+      "Approaching Social Worker"
+     ],
+     "itemsUr": [
+      "دباؤ کا شکار فرد",
+      "معاشرے میں غیر مطابقت پذیر",
+      "حل کا طالب",
+      "سماجی کارکن سے رجوع کرنے والا"
+     ]
+    },
+    {
+     "headingEn": "Problem",
+     "headingUr": "مسئلہ",
+     "itemsEn": [
+      "Hurdle in Social",
+      "Functioning",
+      "Chain Reaction",
+      "Unfulfilled Desire",
+      "Understanding of Problem"
+     ],
+     "itemsUr": [
+      "سماجی افعال میں رکاوٹ",
+      "زنجیری ردعمل",
+      "نامکمل خواہش",
+      "مسئلے کی تفہیم"
+     ]
+    },
+    {
+     "headingEn": "Place",
+     "headingUr": "جگہ",
+     "itemsEn": [
+      "Social Agency",
+      "Policy of Agency",
+      "Nature of Agency",
+      "Services of Agency"
+     ],
+     "itemsUr": [
+      "سماجی ادارہ",
+      "ادارے کی پالیسی",
+      "ادارے کی نوعیت",
+      "ادارے کی خدمات"
+     ]
+    },
+    {
+     "headingEn": "Professional",
+     "headingUr": "پیشہ ور شخص",
+     "itemsEn": [
+      "Representative of Agency",
+      "Accept the Client Request",
+      "Record Keeping Rehabilitation",
+      "Follow the Policy",
+      "Professional Relationship",
+      "Planning & Development",
+      "Co-ordination with other Agencies"
+     ],
+     "itemsUr": [
+      "ادارے کا نمائندہ",
+      "موکل کی درخواست قبول کرنا",
+      "ریکارڈ رکھنا اور بحالی",
+      "پالیسی کی پیروی کرنا",
+      "پیشہ ورانہ تعلق",
+      "منصوبہ بندی اور ترقی",
+      "دوسرے اداروں کے ساتھ رابطہ"
+     ]
+    },
+    {
+     "headingEn": "Process",
+     "headingUr": "عمل",
+     "itemsEn": [
+      "Study",
+      "Diagnosis",
+      "Treatment",
+      "Follow Up"
+     ],
+     "itemsUr": [
+      "مطالعہ",
+      "تشخیص",
+      "علاج",
+      "فالو اپ (پیروی)"
+     ]
+    },
+    {
+     "headingEn": "Objectives",
+     "headingUr": "مقاصد",
+     "itemsEn": [
+      "To help individual",
+      "To Provide peace",
+      "To promote Social Values",
+      "To understand Client issue",
+      "Find Fact & Figures",
+      "To Treat as Professional",
+      "To Solve Problem of Individual",
+      "To help Government in Solving Social Issues"
+     ],
+     "itemsUr": [
+      "فرد کی مدد کرنا",
+      "سکون فراہم کرنا",
+      "سماجی اقدار کو فروغ دینا",
+      "موکل کے مسئلے کو سمجھنا",
+      "حقائق اور اعداد و شمار تلاش کرنا",
+      "ایک پیشہ ور کی طرح برتاؤ کرنا",
+      "فرد کا مسئلہ حل کرنا",
+      "سماجی مسائل کے حل میں حکومت کی مدد کرنا"
+     ]
+    },
+    {
+     "headingEn": "Study",
+     "headingUr": "مطالعہ (اسٹڈی)",
+     "itemsEn": [
+      "History & Background",
+      "Multi-Dimensional Info",
+      "Reality Of The Problem",
+      "Psycho-Social Background Maintaining",
+      "Bio data",
+      "Interviewing Approaching",
+      "The Facts",
+      "Record",
+      "Keeping Source Of Knowledge"
+     ],
+     "itemsUr": [
+      "تاریخ اور پس منظر",
+      "کثیر جہتی معلومات",
+      "مسئلے کی حقیقت",
+      "نفسیاتی و سماجی پس منظر",
+      "بائیو ڈیٹا برقرار رکھنا",
+      "انٹرویو کرنا",
+      "رسائی حاصل کرنا",
+      "حقائق",
+      "ریکارڈ رکھنا",
+      "علم کا ذریعہ"
+     ]
+    },
+    {
+     "headingEn": "Diagnosis",
+     "headingUr": "تشخیص (ڈائیگناسس)",
+     "itemsEn": [
+      "On The Basis Of Study",
+      "Finding The Root Cause",
+      "Multi-Dimensional Analysis Professional Opinion Bridging Study",
+      "Treatment Importance"
+     ],
+     "itemsUr": [
+      "مطالعہ کی بنیاد پر",
+      "بنیادی وجہ تلاش کرنا",
+      "کثیر جہتی تجزیہ",
+      "پیشہ ورانہ رائے",
+      "مطالعہ اور علاج کے درمیان پل کا کردار",
+      "اہمیت"
+     ]
+    },
+    {
+     "headingEn": "Treatment",
+     "headingUr": "علاج (ٹریٹمنٹ)",
+     "itemsEn": [
+      "Provision Of Services Environmental Manipulation",
+      "The Repute",
+      "Interview",
+      "Behavioral Change",
+      "Psychological Support"
+     ],
+     "itemsUr": [
+      "خدمات کی فراہمی",
+      "ماحولیاتی ردوبدل (انوائرمنٹل مینیپولیشن)",
+      "شہرت",
+      "انٹرویو",
+      "رویے میں تبدیلی",
+      "نفسیاتی مدد"
+     ]
+    },
+    {
+     "headingEn": "Follow up",
+     "headingUr": "فالو اپ (پیروی)",
+     "itemsEn": [
+      "Follow-up",
+      "Post-treatment",
+      "Home Visits",
+      "Advantages"
+     ],
+     "itemsUr": [
+      "فالو اپ",
+      "علاج کے بعد کا مرحلہ",
+      "گھریلو دورے"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p2_social_action",
+   "sections": [
+    {
+     "headingEn": "",
+     "headingUr": "",
+     "itemsEn": [
+      "Useful changes in society",
+      "Make a plan",
+      "Sort out issues",
+      "Make hypothesis's",
+      "To solve social issues",
+      "To help the community",
+      "Social development",
+      "Economic development",
+      "To bring social change",
+      "To reduce poverty",
+      "To eliminate corruption",
+      "To improve education sector",
+      "Health Sector reforms"
+     ],
+     "itemsUr": [
+      "معاشرے میں مفید تبدیلیاں",
+      "منصوبہ بندی کرنا",
+      "مسائل کو حل کرنا",
+      "مفروضے بنانا",
+      "سماجی مسائل کو حل کرنا",
+      "کمیونٹی کی مدد کرنا",
+      "سماجی ترقی",
+      "معاشی ترقی",
+      "سماجی تبدیلی لانا",
+      "غربت کا خاتمہ",
+      "بدعنوانی کا خاتمہ",
+      "تعلیمی شعبے میں بہتری",
+      "صحت کے شعبے میں اصلاحات"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p2_group_work",
+   "sections": [
+    {
+     "headingEn": "Principles",
+     "headingUr": "اصول",
+     "itemsEn": [
+      "Planned Group",
+      "Formation",
+      "Specific",
+      "Objectives",
+      "Purposeful",
+      "Individuality",
+      "Group Interaction",
+      "Flexible Policy",
+      "Making Self- Determination",
+      "Program Planning",
+      "Resources Utilization",
+      "Evaluation"
+     ],
+     "itemsUr": [
+      "منصوبہ بند گروہی تشکیل",
+      "مخصوص مقاصد",
+      "بامقصد",
+      "انفرادیت",
+      "گروہی باہمی تعامل",
+      "لچکدار پالیسی سازی",
+      "خود ارادیت",
+      "پروگرام کی منصوبہ بندی",
+      "وسائل کا استعمال",
+      "جائزہ"
+     ]
+    },
+    {
+     "headingEn": "Objectives",
+     "headingUr": "مقاصد",
+     "itemsEn": [
+      "Satisfying basic needs",
+      "Provision of education & training",
+      "Skill development",
+      "Recreation",
+      "Enhancement of capabilities",
+      "Attitudinal modification",
+      "Discouraging negative mind sets",
+      "Provision of democratic atmosphere",
+      "Coordination & cooperative",
+      "Discipline",
+      "Leadership"
+     ],
+     "itemsUr": [
+      "بنیادی ضروریات کی تسکین",
+      "تعلیم اور تربیت کی فراہمی",
+      "مہارت کی نشوونما",
+      "تفریح",
+      "صلاحیتوں میں اضافہ",
+      "رویے میں تبدیلی",
+      "منفی رجحانات کا حوصلہ شکنی",
+      "جمہوری ماحول کی فراہمی",
+      "ہم آہنگی اور تعاون",
+      "نظم و ضبط",
+      "قیادت"
+     ]
+    },
+    {
+     "headingEn": "Fields",
+     "headingUr": "شعبے",
+     "itemsEn": [
+      "Women welfare",
+      "Child welfare",
+      "Youth welfare",
+      "Welfare of senior citizens",
+      "Welfare of handicapped"
+     ],
+     "itemsUr": [
+      "خواتین کی فلاح و بہبود",
+      "بچوں کی فلاح و بہبود",
+      "نوجوانوں کی فلاح و بہبود",
+      "بزرگ شہریوں کی فلاح و بہبود",
+      "معذور افراد کی فلاح و بہبود"
+     ]
+    },
+    {
+     "headingEn": "Stages",
+     "headingUr": "مراحل",
+     "itemsEn": [
+      "Forming",
+      "Storming",
+      "Norming",
+      "Performing",
+      "Adjourning"
+     ],
+     "itemsUr": [
+      "آغاز",
+      "کشمکش",
+      "ضابطہ بندی",
+      "عمل درآمد",
+      "اختتام"
+     ]
+    },
+    {
+     "headingEn": "Components",
+     "headingUr": "اجزا",
+     "itemsEn": [
+      "Group",
+      "Agency - Office",
+      "Group Work"
+     ],
+     "itemsUr": [
+      "گروہ",
+      "ادارہ",
+      "گروہی کام"
+     ]
+    },
+    {
+     "headingEn": "Group",
+     "headingUr": "گروہ",
+     "itemsEn": [
+      "Having specific objectives",
+      "Collective objectives",
+      "Discipline & Manners",
+      "Changing Attitude & Behavior",
+      "Mutual Respect",
+      "Democratic"
+     ],
+     "itemsUr": [
+      "مخصوص مقاصد کا حامل",
+      "اجتماعی مقاصد",
+      "نظم و ضبط اور آداب",
+      "رویے اور کردار کی تبدیلی",
+      "باہمی احترام",
+      "جمہوری"
+     ]
+    },
+    {
+     "headingEn": "Agency",
+     "headingUr": "ادارہ",
+     "itemsEn": [
+      "Value of services",
+      "Specific & Specialization",
+      "Budget, staff",
+      "Corporate Culture"
+     ],
+     "itemsUr": [
+      "خدمات کی قدر",
+      "خصوصیت اور مہارت",
+      "بجٹ اور عملہ",
+      "ادارہ جاتی کلچر"
+     ]
+    },
+    {
+     "headingEn": "Group Work",
+     "headingUr": "گروہی کام",
+     "itemsEn": [
+      "Organizes the group",
+      "Analysis group needs",
+      "Formation of objectives",
+      "Planning & coordination",
+      "Attendant & technical guidance",
+      "Record Keeping",
+      "Solving group disputes",
+      "Bridging between agency and group",
+      "Enhancement of Various Skills"
+     ],
+     "itemsUr": [
+      "گروہ کو منظم کرنا",
+      "گروہ کی ضروریات کا تجزیہ",
+      "مقاصد کی تشکیل",
+      "منصوبہ بندی اور رابطہ کاری",
+      "معاونت اور تکنیکی رہنمائی",
+      "ریکارڈ رکھنا",
+      "گروہی تنازعات کا حل",
+      "ادارے اور گروہ کے درمیان پل کا کردار",
+      "مختلف صلاحیتوں میں اضافہ"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p2_community_development",
+   "sections": [
+    {
+     "headingEn": "Principles",
+     "headingUr": "اصول",
+     "itemsEn": [
+      "Respect",
+      "Self-determination",
+      "Participation",
+      "Self-help",
+      "Need Prioritization"
+     ],
+     "itemsUr": [
+      "احترام",
+      "خود ارادیت",
+      "شرکت",
+      "خود انحصاری",
+      "ضروریات کی ترجیح"
+     ]
+    },
+    {
+     "headingEn": "Study",
+     "headingUr": "مطالعہ",
+     "itemsEn": [
+      "Background",
+      "Economic structure",
+      "Educational structure",
+      "Needs & profile",
+      "No. of affectees",
+      "Felt needs",
+      "Existing resources",
+      "Key persons",
+      "Cultural patterns",
+      "Collective behavior"
+     ],
+     "itemsUr": [
+      "پس منظر",
+      "معاشی ڈھانچہ",
+      "تعلیمی ڈھانچہ",
+      "ضروریات اور پروفائل",
+      "متاثرین کی تعداد",
+      "محسوس شدہ ضروریات",
+      "موجودہ وسائل",
+      "کلیدی شخصیات",
+      "ثقافتی نمونے",
+      "اجتماعی رویہ"
+     ]
+    },
+    {
+     "headingEn": "Planning",
+     "headingUr": "منصوبہ بندی",
+     "itemsEn": [
+      "It is a paper",
+      "work",
+      "Felt need",
+      "Start with easy task",
+      "Ensure community participation",
+      "Alignment with Gov. Policy",
+      "Compatible with community resources"
+     ],
+     "itemsUr": [
+      "یہ کاغذی کام ہے",
+      "محسوس شدہ ضرورت",
+      "آسان کام سے آغاز کریں",
+      "کمیونٹی کی شرکت کو یقینی بنائیں",
+      "حکومتی پالیسی سے ہم آہنگی",
+      "کمیونٹی کے وسائل کے ساتھ مطابقت"
+     ]
+    },
+    {
+     "headingEn": "Implementation",
+     "headingUr": "عمل درآمد",
+     "itemsEn": [
+      "Organization of the community",
+      "Committees Supervision",
+      "Coordination",
+      "Eradicate hurdles",
+      "Suggestions",
+      "Motivation",
+      "Enforcement"
+     ],
+     "itemsUr": [
+      "کمیونٹی کی تنظیم",
+      "کمیٹیاں",
+      "نگرانی",
+      "رابطہ کاری",
+      "رکاوٹوں کا خاتمہ",
+      "تجاویز",
+      "حوصلہ افزائی",
+      "نفاذ"
+     ]
+    },
+    {
+     "headingEn": "Evaluation",
+     "headingUr": "جائزہ",
+     "itemsEn": [
+      "Impartial evaluation",
+      "Study",
+      "planning",
+      "implantation",
+      "Due appreciation",
+      "Analyzing the coordination",
+      "Achievements and failure",
+      "Role of supervision"
+     ],
+     "itemsUr": [
+      "غیر جانبدارانہ جائزہ",
+      "مطالعہ",
+      "منصوبہ بندی",
+      "عمل درآمد",
+      "مناسب تحسین",
+      "رابطہ کاری کا تجزیہ",
+      "کامیابیاں اور ناکامیاں",
+      "نگرانی کا کردار"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p2_research_steps",
+   "sections": [
+    {
+     "headingEn": "",
+     "headingUr": "",
+     "itemsEn": [
+      "Selection of the topic",
+      "Literature",
+      "Hypothesis formulation",
+      "Research design",
+      "Data collection",
+      "Data analysis",
+      "Reporting"
+     ],
+     "itemsUr": [
+      "موضوع کا انتخاب",
+      "لٹریچر ریویو (ادبی جائزہ)",
+      "مفروضے کی تشکیل",
+      "تحقیقی ڈیزائن",
+      "ڈیٹا کا حصول",
+      "ڈیٹا کا تجزیہ",
+      "رپورٹنگ"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p2_role_worker",
+   "sections": [
+    {
+     "headingEn": "",
+     "headingUr": "",
+     "itemsEn": [
+      "Leader",
+      "Coordinator",
+      "Mentor / Expert",
+      "Liaison Expert Consultant",
+      "Moderator",
+      "Guide",
+      "Trainer",
+      "Mobiliser",
+      "Planner",
+      "Supervisor",
+      "Representative",
+      "Educator",
+      "Capacity builder",
+      "Psychological support provider",
+      "Motivator",
+      "Counselor"
+     ],
+     "itemsUr": [
+      "رہنما",
+      "رابطہ کار",
+      "استاد / ماہر",
+      "رابطہ کاری کا ماہر",
+      "مشیر",
+      "ناظم",
+      "راہنما",
+      "ٹرینر",
+      "متحرک کرنے والا",
+      "منصوبہ ساز",
+      "نگران",
+      "نمائندہ",
+      "معلم",
+      "صلاحیت کار",
+      "نفسیاتی معاونت فراہم کرنے والا",
+      "حوصلہ افزائی کرنے والا",
+      "کونسلر"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p2_data_tools",
+   "sections": [
+    {
+     "headingEn": "",
+     "headingUr": "",
+     "itemsEn": [
+      "Case Study",
+      "Observation",
+      "Comparative historical",
+      "Field research",
+      "Survey",
+      "Interview",
+      "Content analysis",
+      "Experiment",
+      "Interpretation"
+     ],
+     "itemsUr": [
+      "کیس اسٹڈی",
+      "مشاہدہ",
+      "تقابلی تاریخی مطالعہ",
+      "فیلڈ ریسرچ",
+      "سروے",
+      "انٹرویو",
+      "مواد کا تجزیہ",
+      "تجربہ",
+      "تشریح"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p2_welfare_admin",
+   "sections": [
+    {
+     "headingEn": "",
+     "headingUr": "",
+     "itemsEn": [
+      "To Frame Policies of Social welfare",
+      "Implementation of Policies",
+      "Analyzing the problem",
+      "Competent Person's to Solve Issues",
+      "Collecting and organizing the research based facts",
+      "Determining the Objectives",
+      "Enhance the Social Welfare efficiency",
+      "Organization structure",
+      "Social Development",
+      "Economic Development",
+      "Hiring and recruitment",
+      "Budgeting and finance",
+      "Record keeping"
+     ],
+     "itemsUr": [
+      "سماجی بہبود کی پالیسیاں تشکیل دینا",
+      "پالیسیوں کا نفاذ",
+      "مسئلے کا تجزیہ کرنا",
+      "مسائل حل کرنے کے لیے اہل افراد",
+      "تحقیق پر مبنی حقائق کو جمع کرنا اور منظم کرنا",
+      "مقاصد کا تعین کرنا",
+      "سماجی بہبود کی کارکردگی کو بڑھانا",
+      "تنظیمی ڈھانچہ",
+      "سماجی ترقی",
+      "معاشی ترقی",
+      "خدمات حاصل کرنا اور بھرتی",
+      "بجٹ سازی اور مالیات",
+      "ریکارڈ رکھنا"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "p2_ngo_role",
+   "sections": [
+    {
+     "headingEn": "",
+     "headingUr": "",
+     "itemsEn": [
+      "Education Sector",
+      "Health Sector",
+      "Child Labor",
+      "Women Rights",
+      "Minority Rights",
+      "Environment Issues",
+      "Youth Development",
+      "Volunteerism",
+      "Bounded Labor",
+      "Free & Fair Elections",
+      "Food Security",
+      "Refugees / Immigrants",
+      "Religious Harmony",
+      "Industrial Development"
+     ],
+     "itemsUr": [
+      "تعلیمی شعبہ",
+      "صحت کا شعبہ",
+      "بچوں کی مشقت",
+      "خواتین کے حقوق",
+      "اقلیتوں کے حقوق",
+      "ماحولیاتی مسائل",
+      "نوجوانوں کی ترقی",
+      "رضاکارانہ خدمات",
+      "جبری مشقت",
+      "آزادانہ اور منصفانہ انتخابات",
+      "خوراک کی حفاظت",
+      "مہاجرین / تارکین وطن",
+      "مذہبی ہم آہنگی",
+      "صنعتی ترقی"
+     ]
+    }
+   ]
+  }
+ ]
+}
