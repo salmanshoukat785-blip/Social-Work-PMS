@@ -58,6 +58,13 @@ private data class Tab(
     val label: (AppStrings) -> String
 )
 
+/** The tab that should look selected on a screen opened from it (e.g. Glossary belongs to Tools). */
+private fun tabRouteFor(route: String?): String? = when (route) {
+    Routes.GLOSSARY, Routes.FLASHCARDS, Routes.MY_NOTES, Routes.PDF_READER, Routes.PROGRESS -> Routes.TOOLS
+    Routes.MOCK, Routes.QUIZ, Routes.QUIZ_RESULT, Routes.QUIZ_REVIEW -> Routes.PRACTICE
+    else -> route
+}
+
 private val tabs = listOf(
     Tab(Routes.HOME, Icons.Filled.Home) { it.tabHome },
     Tab(Routes.PAPERS, Icons.AutoMirrored.Filled.MenuBook) { it.tabPapers },
@@ -122,7 +129,7 @@ fun MainShell(
             if (!inQuiz) NavigationBar {
                 tabs.forEach { tab ->
                     NavigationBarItem(
-                        selected = currentRoute == tab.route,
+                        selected = tabRouteFor(currentRoute) == tab.route,
                         onClick = {
                             navController.navigate(tab.route) {
                                 popUpTo(Routes.HOME) { saveState = true }

@@ -12,8 +12,8 @@ android {
         applicationId = "com.socialwork.academy"
         minSdk = 24
         targetSdk = 35
-        versionCode = 10
-        versionName = "0.11.0-phase11"
+        versionCode = 11
+        versionName = "1.0.0-rc1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
