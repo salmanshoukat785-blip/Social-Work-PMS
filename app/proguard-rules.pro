@@ -1,1 +1,1 @@
-# Add project specific ProGuard rules here.
+# Project-specific ProGuard rules (release minification is off in Phase 1)

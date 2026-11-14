@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.PakistanLaws" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:windowBackground">@color/window_bg</item>
+    <!-- Window theme only; the visible UI is drawn by Jetpack Compose. -->
+    <style name="Theme.SocialWorkAcademy" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/window_background</item>
     </style>
 </resources>

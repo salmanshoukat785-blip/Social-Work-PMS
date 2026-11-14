@@ -1,5 +1,6 @@
 # Changelog
 
+- 1.0.0-rc2 (Phase 13): "Additional Explanation" (short + long, English + Urdu) for every Paper 1 sub-heading. Written to help study; not from the Word file; not teacher-reviewed. Paper 2 to follow.
 - 1.0.0-rc1: final review. Tools and Practice tabs stay highlighted on their sub-screens; old "later phase" text removed; README and docs added.
 - 0.11.0 (Phases 10 and 11): accessibility (headings, quiz choices, switches, chart), green "correct" colour, offline and Urdu text tests, new build and signed-release workflows.
 - 0.9.0 (Phase 9): progress dashboard, backup and restore, reset progress, about and privacy.
