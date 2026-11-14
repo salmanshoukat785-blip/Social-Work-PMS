@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Social Work Academy</string>
+    <string name="app_name">Pakistan Laws</string>
+    <string name="tab_home">Home</string>
+    <string name="tab_library">Library</string>
+    <string name="tab_practice">Practice</string>
+    <string name="tab_study">Study</string>
+    <string name="tab_profile">Profile</string>
+    <string name="coming_soon">This section is coming in a later part.</string>
 </resources>
