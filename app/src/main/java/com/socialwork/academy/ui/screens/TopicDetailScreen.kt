@@ -52,6 +52,7 @@ import com.socialwork.academy.data.TopicSection
 import com.socialwork.academy.ui.AppStrings
 import com.socialwork.academy.ui.DetailStrings
 import com.socialwork.academy.ui.StudyStrings
+import com.socialwork.academy.ui.theme.hierarchyColors
 
 /**
  * Notes reader for one topic: both-language titles, bookmark, copy, share,
@@ -228,37 +229,53 @@ fun TopicDetailScreen(
 
 @Composable
 private fun SectionCard(section: TopicSection, isUrdu: Boolean, fontScale: Float) {
+    val colors = hierarchyColors()
+    val heading = section.heading(isUrdu)
+    val otherHeading = section.otherHeading(isUrdu)
+    val hasItems = section.itemsEn.isNotEmpty() || section.itemsUr.isNotEmpty()
+
+    val (container, onContainer, indent) = when (section.level) {
+        0 -> Triple(colors.chapter, colors.onChapter, 0)
+        2 -> Triple(colors.sub, colors.onSub, 16)
+        else -> Triple(colors.heading, colors.onHeading, 0)
+    }
+
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().padding(start = indent.dp),
         shape = RoundedCornerShape(20.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+        colors = CardDefaults.cardColors(containerColor = container, contentColor = onContainer)
     ) {
         Column(
             modifier = Modifier.padding(20.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            val heading = section.heading(isUrdu)
-            val otherHeading = section.otherHeading(isUrdu)
             if (heading.isNotBlank()) {
                 Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                    Text(text = heading, style = MaterialTheme.typography.titleMedium, modifier = Modifier.asHeading())
+                    Text(
+                        text = heading,
+                        style = MaterialTheme.typography.titleMedium,
+                        color = onContainer,
+                        modifier = Modifier.asHeading()
+                    )
                     if (otherHeading.isNotBlank()) {
                         Text(
                             text = otherHeading,
                             style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                            color = onContainer.copy(alpha = 0.8f)
                         )
                     }
                 }
             }
 
-            // The selected language comes first; both lists are shown as they are in the file.
-            if (isUrdu) {
-                LanguageBlock(label = "اردو", items = section.itemsUr, rtl = true, fontScale = fontScale)
-                LanguageBlock(label = "English", items = section.itemsEn, rtl = false, fontScale = fontScale)
-            } else {
-                LanguageBlock(label = "English", items = section.itemsEn, rtl = false, fontScale = fontScale)
-                LanguageBlock(label = "اردو", items = section.itemsUr, rtl = true, fontScale = fontScale)
+            if (hasItems) {
+                // The selected language comes first; both lists are shown as they are in the file.
+                if (isUrdu) {
+                    LanguageBlock(label = "اردو", items = section.itemsUr, rtl = true, fontScale = fontScale, textColor = onContainer)
+                    LanguageBlock(label = "English", items = section.itemsEn, rtl = false, fontScale = fontScale, textColor = onContainer)
+                } else {
+                    LanguageBlock(label = "English", items = section.itemsEn, rtl = false, fontScale = fontScale, textColor = onContainer)
+                    LanguageBlock(label = "اردو", items = section.itemsUr, rtl = true, fontScale = fontScale, textColor = onContainer)
+                }
             }
         }
     }
@@ -266,7 +283,13 @@ private fun SectionCard(section: TopicSection, isUrdu: Boolean, fontScale: Float
 
 /** One language's list. Its own text direction, whatever the app language is. */
 @Composable
-private fun LanguageBlock(label: String, items: List<String>, rtl: Boolean, fontScale: Float) {
+private fun LanguageBlock(
+    label: String,
+    items: List<String>,
+    rtl: Boolean,
+    fontScale: Float,
+    textColor: androidx.compose.ui.graphics.Color
+) {
     if (items.isEmpty()) return
     val direction = if (rtl) LayoutDirection.Rtl else LayoutDirection.Ltr
     val base = MaterialTheme.typography.bodyLarge
@@ -279,10 +302,10 @@ private fun LanguageBlock(label: String, items: List<String>, rtl: Boolean, font
             Text(
                 text = label,
                 style = MaterialTheme.typography.labelLarge,
-                color = MaterialTheme.colorScheme.secondary
+                color = textColor.copy(alpha = 0.75f)
             )
             items.forEach { item ->
-                Text(text = "• $item", style = itemStyle)
+                Text(text = "• $item", style = itemStyle, color = textColor)
             }
         }
     }

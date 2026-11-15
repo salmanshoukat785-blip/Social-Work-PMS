@@ -14,7 +14,9 @@ data class TopicSection(
     val headingEn: String,
     val headingUr: String,
     val itemsEn: List<String>,
-    val itemsUr: List<String>
+    val itemsUr: List<String>,
+    /** 0 = band (chapter part), 1 = heading, 2 = sub-heading under the heading above it. */
+    val level: Int = 1
 ) {
     fun heading(isUrdu: Boolean): String = if (isUrdu) headingUr else headingEn
     fun otherHeading(isUrdu: Boolean): String = if (isUrdu) headingEn else headingUr
@@ -56,7 +58,8 @@ object ContentParser {
                     headingEn = s.optString("headingEn").trim(),
                     headingUr = s.optString("headingUr").trim(),
                     itemsEn = s.getJSONArray("itemsEn").toStringList(),
-                    itemsUr = s.getJSONArray("itemsUr").toStringList()
+                    itemsUr = s.getJSONArray("itemsUr").toStringList(),
+                    level = s.optInt("level", 1).coerceIn(0, 2)
                 )
             }
             topics[id] = TopicContent(id, list)

@@ -1,5 +1,6 @@
 # Changelog
 
+- 1.0.0-rc4 (Phase 15): papers are shown by the PDF chapters (Paper 1: 6, Paper 2: 13), with 3 colours for chapter, heading and sub-heading; nested topics (Case Work, Group Work, Community Development) show their sub-headings.
 - 1.0.0-rc3 (Phase 14): "Additional Explanation" now also for all Paper 2 topics (19 topics). Not from the Word file; not teacher-reviewed.
 - 1.0.0-rc2 (Phase 13): "Additional Explanation" (short + long, English + Urdu) for every Paper 1 sub-heading. Written to help study; not from the Word file; not teacher-reviewed. Paper 2 to follow.
 - 1.0.0-rc1: final review. Tools and Practice tabs stay highlighted on their sub-screens; old "later phase" text removed; README and docs added.

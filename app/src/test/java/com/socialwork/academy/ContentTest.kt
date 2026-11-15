@@ -41,7 +41,8 @@ class ContentTest {
     fun everySectionHasItemsAndNoBlankLines() {
         bundle.topics.values.forEach { topic ->
             topic.sections.forEach { s ->
-                assertTrue(s.itemsEn.isNotEmpty() || s.itemsUr.isNotEmpty())
+                // A heading that only groups sub-headings (level 0 or 1) may have no points.
+                assertTrue(s.itemsEn.isNotEmpty() || s.itemsUr.isNotEmpty() || s.level <= 1)
                 assertTrue(s.itemsEn.all { it.isNotBlank() })
                 assertTrue(s.itemsUr.all { it.isNotBlank() })
             }
@@ -79,5 +80,28 @@ class ContentTest {
         assertTrue(headings.contains("Fields of Social Case Work"))
         assertTrue(headings.contains("Diagnosis"))
         assertTrue(headings.contains("Follow up"))
+    }
+
+    @Test
+    fun nestedTopicsHaveTheThreeLevels() {
+        val case = bundle.forTopic("p2_case_work")!!.sections
+        assertEquals(0, case.first { it.headingEn.startsWith("Phases") }.level)
+        assertEquals(listOf("Person", "Problem", "Place", "Professional", "Process"),
+            case.filter { it.level == 2 }.map { it.headingEn })
+
+        val group = bundle.forTopic("p2_group_work")!!.sections
+        assertEquals(listOf("Group", "Agency", "Group Work"), group.filter { it.level == 2 }.map { it.headingEn })
+
+        val community = bundle.forTopic("p2_community_development")!!.sections
+        assertEquals(listOf("Study", "Planning", "Implementation", "Evaluation"),
+            community.filter { it.level == 2 }.map { it.headingEn })
+    }
+
+    @Test
+    fun aSubHeadingAlwaysFollowsAHeading() {
+        bundle.topics.values.forEach { topic ->
+            val levels = topic.sections.map { it.level }
+            if (levels.isNotEmpty()) assertTrue(topic.topicId, levels.first() != 2)
+        }
     }
 }

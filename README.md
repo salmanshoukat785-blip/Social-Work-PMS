@@ -3,7 +3,7 @@
 An **offline** Android study app (Kotlin + Jetpack Compose, Material 3) for *Social Work for PMS*,
 Paper 1 and Paper 2, with an Urdu (right-to-left) and English (left-to-right) interface.
 
-Version `1.0.0-rc3` (release candidate: built and checked by the steps below, not yet confirmed on a phone by the author).
+Version `1.0.0-rc4` (release candidate: built and checked by the steps below, not yet confirmed on a phone by the author).
 
 ## What is inside
 - **Notes** from the Word file "Social Work Paper 1 & 2": 37 topics (Paper 1: 15, Paper 2: 22), English and Urdu side by side,

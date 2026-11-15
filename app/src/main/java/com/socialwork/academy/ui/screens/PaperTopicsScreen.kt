@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -29,11 +30,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.socialwork.academy.data.Chapter
+import com.socialwork.academy.data.ChapterCatalog
 import com.socialwork.academy.data.Topic
 import com.socialwork.academy.data.TopicCatalog
 import com.socialwork.academy.ui.AppStrings
+import com.socialwork.academy.ui.theme.HierarchyColors
+import com.socialwork.academy.ui.theme.hierarchyColors
 
-/** The list of topics of one paper. */
+/** The chapters of one paper; each chapter lists its headings (topics) under it. */
 @Composable
 fun PaperTopicsScreen(
     strings: AppStrings,
@@ -46,7 +51,8 @@ fun PaperTopicsScreen(
     modifier: Modifier = Modifier
 ) {
     val title = if (paperId == 2) strings.paper2 else strings.paper1
-    val topics = TopicCatalog.forPaper(paperId)
+    val chapters = ChapterCatalog.forPaper(paperId)
+    val colors = hierarchyColors()
 
     Column(modifier = modifier.fillMaxSize()) {
         Row(
@@ -62,17 +68,18 @@ fun PaperTopicsScreen(
 
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
-            contentPadding = androidx.compose.foundation.layout.PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
-            itemsIndexed(topics, key = { _, topic -> topic.id }) { index, topic ->
-                TopicRow(
+            itemsIndexed(chapters, key = { _, chapter -> chapter.key }) { index, chapter ->
+                ChapterBlock(
                     number = index + 1,
-                    topic = topic,
+                    chapter = chapter,
                     isUrdu = isUrdu,
-                    completed = topic.id in completedTopics,
-                    bookmarked = topic.id in bookmarks,
-                    onClick = { onOpenTopic(topic.id) }
+                    colors = colors,
+                    completedTopics = completedTopics,
+                    bookmarks = bookmarks,
+                    onOpenTopic = onOpenTopic
                 )
             }
         }
@@ -80,10 +87,84 @@ fun PaperTopicsScreen(
 }
 
 @Composable
-private fun TopicRow(
+private fun ChapterBlock(
     number: Int,
+    chapter: Chapter,
+    isUrdu: Boolean,
+    colors: HierarchyColors,
+    completedTopics: Set<String>,
+    bookmarks: Set<String>,
+    onOpenTopic: (String) -> Unit
+) {
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        val topicId = chapter.chapterTopicId
+        // Chapter bar (strong colour). It opens the chapter's own notes when it has any.
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .then(if (topicId != null) Modifier.clickable { onOpenTopic(topicId) } else Modifier),
+            shape = RoundedCornerShape(16.dp),
+            colors = CardDefaults.cardColors(containerColor = colors.chapter)
+        ) {
+            Row(
+                modifier = Modifier.padding(16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(36.dp)
+                        .clip(CircleShape)
+                        .background(colors.onChapter),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = number.toString(),
+                        style = MaterialTheme.typography.labelLarge,
+                        color = colors.chapter
+                    )
+                }
+                Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                    Text(
+                        text = chapter.title(isUrdu),
+                        style = MaterialTheme.typography.titleMedium,
+                        color = colors.onChapter
+                    )
+                    Text(
+                        text = chapter.otherTitle(isUrdu),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = colors.onChapter.copy(alpha = 0.85f)
+                    )
+                }
+                if (topicId != null && topicId in bookmarks) {
+                    Icon(Icons.Filled.Bookmark, contentDescription = null, tint = colors.onChapter)
+                }
+                if (topicId != null && topicId in completedTopics) {
+                    Icon(Icons.Filled.CheckCircle, contentDescription = null, tint = colors.onChapter)
+                }
+            }
+        }
+
+        // Headings of the chapter (soft colour), slightly indented.
+        chapter.childTopicIds.forEach { id ->
+            val topic = TopicCatalog.byId(id) ?: return@forEach
+            HeadingRow(
+                topic = topic,
+                isUrdu = isUrdu,
+                colors = colors,
+                completed = id in completedTopics,
+                bookmarked = id in bookmarks,
+                onClick = { onOpenTopic(id) }
+            )
+        }
+    }
+}
+
+@Composable
+private fun HeadingRow(
     topic: Topic,
     isUrdu: Boolean,
+    colors: HierarchyColors,
     completed: Boolean,
     bookmarked: Boolean,
     onClick: () -> Unit
@@ -91,52 +172,33 @@ private fun TopicRow(
     Card(
         modifier = Modifier
             .fillMaxWidth()
+            .padding(start = 16.dp)
             .clickable(onClick = onClick),
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+        shape = RoundedCornerShape(14.dp),
+        colors = CardDefaults.cardColors(containerColor = colors.heading)
     ) {
         Row(
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier.padding(14.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            Box(
-                modifier = Modifier
-                    .size(36.dp)
-                    .clip(CircleShape)
-                    .background(MaterialTheme.colorScheme.secondaryContainer),
-                contentAlignment = Alignment.Center
-            ) {
+            Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
                 Text(
-                    text = number.toString(),
-                    style = MaterialTheme.typography.labelLarge,
-                    color = MaterialTheme.colorScheme.onSecondaryContainer
+                    text = topic.title(isUrdu),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = colors.onHeading
                 )
-            }
-            Column(
-                modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(2.dp)
-            ) {
-                Text(text = topic.title(isUrdu), style = MaterialTheme.typography.titleMedium)
                 Text(
                     text = topic.otherTitle(isUrdu),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = colors.onHeading.copy(alpha = 0.8f)
                 )
             }
             if (bookmarked) {
-                Icon(
-                    imageVector = Icons.Filled.Bookmark,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.secondary
-                )
+                Icon(Icons.Filled.Bookmark, contentDescription = null, tint = colors.onHeading)
             }
             if (completed) {
-                Icon(
-                    imageVector = Icons.Filled.CheckCircle,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.secondary
-                )
+                Icon(Icons.Filled.CheckCircle, contentDescription = null, tint = colors.onHeading)
             }
         }
     }
