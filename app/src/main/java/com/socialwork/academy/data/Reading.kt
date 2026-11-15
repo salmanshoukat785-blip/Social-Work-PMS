@@ -22,20 +22,16 @@ object FontScale {
 /** Plain text of a topic, used by the Copy and Share buttons. */
 object ReadingText {
 
+    /** Only the language the app is in: title, headings and points. */
     fun build(topic: Topic, sections: List<TopicSection>, isUrdu: Boolean): String {
         val out = StringBuilder()
         out.append(topic.title(isUrdu)).append('\n')
-        out.append(topic.otherTitle(isUrdu)).append("\n")
         sections.forEach { s ->
             out.append('\n')
             val heading = s.heading(isUrdu)
-            val other = s.otherHeading(isUrdu)
             if (heading.isNotBlank()) out.append(heading).append('\n')
-            if (other.isNotBlank()) out.append(other).append('\n')
-            val ordered = if (isUrdu) listOf(s.itemsUr, s.itemsEn) else listOf(s.itemsEn, s.itemsUr)
-            ordered.forEach { items ->
-                items.forEach { out.append("• ").append(it).append('\n') }
-            }
+            val items = if (isUrdu) s.itemsUr else s.itemsEn
+            items.forEach { out.append("• ").append(it).append('\n') }
         }
         return out.toString().trimEnd()
     }
@@ -71,20 +67,25 @@ object SearchEngine {
             .replace(SPACES, " ")
             .trim()
 
-    fun search(query: String, topics: List<Topic>, bundle: ContentBundle?): List<SearchHit> {
+    /** [isUrdu] = null searches both languages; true / false searches only that language. */
+    fun search(query: String, topics: List<Topic>, bundle: ContentBundle?, isUrdu: Boolean? = null): List<SearchHit> {
         val q = normalize(query)
         if (q.length < MIN_QUERY_LENGTH) return emptyList()
 
         val hits = ArrayList<SearchHit>()
         for (topic in topics) {
-            val titleMatch = normalize(topic.titleEn).contains(q) || normalize(topic.titleUr).contains(q)
+            val titleMatch = when (isUrdu) {
+                null -> normalize(topic.titleEn).contains(q) || normalize(topic.titleUr).contains(q)
+                true -> normalize(topic.titleUr).contains(q)
+                false -> normalize(topic.titleEn).contains(q)
+            }
 
             var count = 0
             val snippets = ArrayList<String>()
             bundle?.forTopic(topic.id)?.sections?.forEach { s ->
                 val lines = buildList {
-                    add(s.headingEn); add(s.headingUr)
-                    addAll(s.itemsEn); addAll(s.itemsUr)
+                    if (isUrdu != true) { add(s.headingEn); addAll(s.itemsEn) }
+                    if (isUrdu != false) { add(s.headingUr); addAll(s.itemsUr) }
                 }
                 lines.forEach { line ->
                     if (line.isNotBlank() && normalize(line).contains(q)) {

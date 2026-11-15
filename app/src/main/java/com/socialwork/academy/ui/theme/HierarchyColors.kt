@@ -1,9 +1,8 @@
 package com.socialwork.academy.ui.theme
 
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.luminance
 
 /**
  * Three colours for the three levels of the notes:
@@ -32,6 +31,8 @@ data class HierarchyColors(
     }
 }
 
+/** Provided by [SocialWorkTheme] for the chosen theme; light colours if nothing is provided. */
+val LocalHierarchyColors = staticCompositionLocalOf { HierarchyColors.Light }
+
 @Composable
-fun hierarchyColors(): HierarchyColors =
-    if (MaterialTheme.colorScheme.background.luminance() < 0.5f) HierarchyColors.Dark else HierarchyColors.Light
+fun hierarchyColors(): HierarchyColors = LocalHierarchyColors.current

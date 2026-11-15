@@ -56,20 +56,29 @@ class ReadingTest {
     // ---- Copy / share text ----
 
     @Test
-    fun readingTextHasTitleAndBothLanguages() {
+    fun readingTextIsEnglishOnlyInEnglishMode() {
         val text = ReadingText.build(topicA, bundle.forTopic("a")!!.sections, isUrdu = false)
-        assertTrue(text.startsWith("Family\nخاندان"))
+        assertTrue(text.startsWith("Family\n"))
         assertTrue(text.contains("• Reproduction"))
-        assertTrue(text.contains("• تولید"))
-        // English first when the app is English
-        assertTrue(text.indexOf("• Reproduction") < text.indexOf("• تولید"))
+        assertFalse(text.contains("خاندان"))
+        assertFalse(text.contains("• تولید"))
     }
 
     @Test
-    fun readingTextPutsUrduFirstInUrduMode() {
+    fun readingTextIsUrduOnlyInUrduMode() {
         val text = ReadingText.build(topicA, bundle.forTopic("a")!!.sections, isUrdu = true)
-        assertTrue(text.startsWith("خاندان\nFamily"))
-        assertTrue(text.indexOf("• تولید") < text.indexOf("• Reproduction"))
+        assertTrue(text.startsWith("خاندان\n"))
+        assertTrue(text.contains("• تولید"))
+        assertFalse(text.contains("Family"))
+        assertFalse(text.contains("• Reproduction"))
+    }
+
+    @Test
+    fun searchInOneLanguageIgnoresTheOther() {
+        assertTrue(SearchEngine.search("reproduction", topics, bundle, isUrdu = true).isEmpty())
+        assertEquals(1, SearchEngine.search("reproduction", topics, bundle, isUrdu = false).size)
+        assertTrue(SearchEngine.search("تولید", topics, bundle, isUrdu = false).isEmpty())
+        assertEquals(1, SearchEngine.search("تولید", topics, bundle, isUrdu = true).size)
     }
 
     // ---- Search ----

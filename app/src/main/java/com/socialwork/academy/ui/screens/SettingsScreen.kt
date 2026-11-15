@@ -37,6 +37,15 @@ import androidx.compose.ui.unit.dp
 import com.socialwork.academy.data.FontScale
 import com.socialwork.academy.ui.AppStrings
 import com.socialwork.academy.ui.DataStatus
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.RadioButton
+import androidx.compose.ui.draw.clip
+import com.socialwork.academy.ui.theme.ThemePalette
+import com.socialwork.academy.ui.theme.ThemeStrings
 import com.socialwork.academy.ui.DataStrings
 
 /** Language, theme and text size (all saved on the phone), then backup, reset, about and privacy. */
@@ -47,6 +56,8 @@ fun SettingsScreen(
     onUrduChange: (Boolean) -> Unit,
     darkMode: Boolean,
     onDarkModeChange: (Boolean) -> Unit,
+    colorTheme: String,
+    onColorThemeChange: (String) -> Unit,
     fontScale: Float,
     onFontScaleChange: (Float) -> Unit,
     ds: DataStrings,
@@ -67,6 +78,7 @@ fun SettingsScreen(
         Text(text = strings.settingsTitle, style = MaterialTheme.typography.titleLarge, modifier = Modifier.asHeading())
         SwitchRow(label = strings.languageLabel, checked = isUrdu, onCheckedChange = onUrduChange)
         SwitchRow(label = strings.darkModeLabel, checked = darkMode, onCheckedChange = onDarkModeChange)
+        ThemeCard(isUrdu = isUrdu, darkMode = darkMode, selected = colorTheme, onSelect = onColorThemeChange)
         TextSizeCard(strings = strings, fontScale = fontScale, onFontScaleChange = onFontScaleChange)
         DataCard(ds, status, onBackupTo, onRestoreFrom, onReset, onStatusShown)
         InfoSection(ds.aboutTitle, ds.aboutBody + "\n" + ds.version(appVersion()))
@@ -252,6 +264,46 @@ private fun SwitchRow(
             Text(text = label, style = MaterialTheme.typography.bodyLarge)
             // The row handles the tap; the switch itself only shows the state.
             Switch(checked = checked, onCheckedChange = null)
+        }
+    }
+}
+
+/** Colour theme choices: each row shows three sample colours of that theme. */
+@Composable
+private fun ThemeCard(isUrdu: Boolean, darkMode: Boolean, selected: String, onSelect: (String) -> Unit) {
+    val ts = ThemeStrings.of(isUrdu)
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(20.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+    ) {
+        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text(ts.title, style = MaterialTheme.typography.titleMedium, modifier = Modifier.asHeading())
+            Text(ts.note, style = MaterialTheme.typography.bodySmall)
+            ThemePalette.all.forEach { p ->
+                val isSelected = p.id == selected
+                val c = p.colors(darkMode)
+                val l = p.levels(darkMode)
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .selectable(selected = isSelected, role = Role.RadioButton, onClick = { onSelect(p.id) })
+                        .padding(vertical = 6.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    RadioButton(selected = isSelected, onClick = null)
+                    Text(text = p.name(isUrdu), style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f))
+                    listOf(l.chapter, c.secondary, l.heading).forEach { color ->
+                        Box(
+                            modifier = Modifier
+                                .size(22.dp)
+                                .clip(CircleShape)
+                                .background(color)
+                        )
+                    }
+                }
+            }
         }
     }
 }

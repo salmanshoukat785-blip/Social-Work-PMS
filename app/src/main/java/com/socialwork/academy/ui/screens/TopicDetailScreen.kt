@@ -34,6 +34,8 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -44,6 +46,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.socialwork.academy.data.ContentState
+import com.socialwork.academy.data.DetailEntry
 import com.socialwork.academy.data.FontScale
 import com.socialwork.academy.data.ReadingText
 import com.socialwork.academy.data.Topic
@@ -132,11 +135,6 @@ fun TopicDetailScreen(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Text(text = topic.title(isUrdu), style = MaterialTheme.typography.headlineMedium)
-            Text(
-                text = topic.otherTitle(isUrdu),
-                style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
         }
 
         Column(
@@ -195,31 +193,43 @@ fun TopicDetailScreen(
                     if (sections.isEmpty()) {
                         InfoCard(text = strings.noSourcePoints)
                     } else {
-                        Text(
-                            text = strings.sourceLabel,
-                            style = MaterialTheme.typography.labelMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                        // Long-press selects text, with the system Copy / Share menu.
-                        SelectionContainer {
-                            Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                                sections.forEach { section ->
-                                    SectionCard(section = section, isUrdu = isUrdu, fontScale = fontScale)
-                                }
+                        val ds = DetailStrings.of(isUrdu)
+                        val entries = details?.entries(isUrdu).orEmpty()
+                        val open = remember(topic.id, isUrdu) { mutableStateOf(emptySet<String>()) }
+                        val longOpen = remember(topic.id, isUrdu) { mutableStateOf(emptySet<String>()) }
+                        val offsets = sections.runningFold(0) { acc, s -> acc + s.items(isUrdu).size }
+
+                        if (entries.isNotEmpty()) DetailsIntro(ds = ds)
+
+                        sections.forEachIndexed { si, section ->
+                            val items = section.items(isUrdu)
+                            // The explanation is used only when its heading is exactly this point.
+                            val matched = items.mapIndexed { i, item ->
+                                entries.getOrNull(offsets[si] + i)?.takeIf { it.heading.trim() == item.trim() }
                             }
+                            SectionCard(
+                                section = section,
+                                isUrdu = isUrdu,
+                                items = items,
+                                details = matched,
+                                sectionIndex = si,
+                                open = open.value,
+                                longOpen = longOpen.value,
+                                fontScale = fontScale,
+                                ds = ds,
+                                onToggle = { key ->
+                                    open.value = if (key in open.value) open.value - key else open.value + key
+                                },
+                                onToggleLong = { key ->
+                                    longOpen.value = if (key in longOpen.value) longOpen.value - key else longOpen.value + key
+                                },
+                                onSetAll = { keys, show ->
+                                    open.value = if (show) open.value + keys else open.value - keys
+                                }
+                            )
                         }
                     }
                 }
-            }
-
-            val detailEntries = details?.entries(isUrdu).orEmpty()
-            if (detailEntries.isNotEmpty()) {
-                DetailCards(
-                    entries = detailEntries,
-                    isUrdu = isUrdu,
-                    fontScale = fontScale,
-                    ds = DetailStrings.of(isUrdu)
-                )
             }
 
             NoteCard(topicId = topic.id, st = st, savedNote = savedNote, onSave = onNoteSave)
@@ -228,17 +238,30 @@ fun TopicDetailScreen(
 }
 
 @Composable
-private fun SectionCard(section: TopicSection, isUrdu: Boolean, fontScale: Float) {
+private fun SectionCard(
+    section: TopicSection,
+    isUrdu: Boolean,
+    items: List<String>,
+    details: List<DetailEntry?>,
+    sectionIndex: Int,
+    open: Set<String>,
+    longOpen: Set<String>,
+    fontScale: Float,
+    ds: DetailStrings,
+    onToggle: (String) -> Unit,
+    onToggleLong: (String) -> Unit,
+    onSetAll: (Set<String>, Boolean) -> Unit
+) {
     val colors = hierarchyColors()
     val heading = section.heading(isUrdu)
-    val otherHeading = section.otherHeading(isUrdu)
-    val hasItems = section.itemsEn.isNotEmpty() || section.itemsUr.isNotEmpty()
 
     val (container, onContainer, indent) = when (section.level) {
         0 -> Triple(colors.chapter, colors.onChapter, 0)
         2 -> Triple(colors.sub, colors.onSub, 16)
         else -> Triple(colors.heading, colors.onHeading, 0)
     }
+    val keys = items.indices.filter { details[it] != null }.map { "$sectionIndex:$it" }.toSet()
+    val allOpen = keys.isNotEmpty() && keys.all { it in open }
 
     Card(
         modifier = Modifier.fillMaxWidth().padding(start = indent.dp),
@@ -246,66 +269,36 @@ private fun SectionCard(section: TopicSection, isUrdu: Boolean, fontScale: Float
         colors = CardDefaults.cardColors(containerColor = container, contentColor = onContainer)
     ) {
         Column(
-            modifier = Modifier.padding(20.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            modifier = Modifier.padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            if (heading.isNotBlank()) {
-                Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+            if (heading.isNotBlank() || keys.isNotEmpty()) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
                         text = heading,
                         style = MaterialTheme.typography.titleMedium,
                         color = onContainer,
-                        modifier = Modifier.asHeading()
+                        modifier = Modifier.weight(1f).asHeading()
                     )
-                    if (otherHeading.isNotBlank()) {
-                        Text(
-                            text = otherHeading,
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = onContainer.copy(alpha = 0.8f)
-                        )
+                    if (keys.isNotEmpty()) {
+                        TextButton(onClick = { onSetAll(keys, !allOpen) }) {
+                            Text(if (allOpen) ds.collapseAll else ds.expandAll, color = onContainer)
+                        }
                     }
                 }
             }
-
-            if (hasItems) {
-                // The selected language comes first; both lists are shown as they are in the file.
-                if (isUrdu) {
-                    LanguageBlock(label = "اردو", items = section.itemsUr, rtl = true, fontScale = fontScale, textColor = onContainer)
-                    LanguageBlock(label = "English", items = section.itemsEn, rtl = false, fontScale = fontScale, textColor = onContainer)
-                } else {
-                    LanguageBlock(label = "English", items = section.itemsEn, rtl = false, fontScale = fontScale, textColor = onContainer)
-                    LanguageBlock(label = "اردو", items = section.itemsUr, rtl = true, fontScale = fontScale, textColor = onContainer)
-                }
-            }
-        }
-    }
-}
-
-/** One language's list. Its own text direction, whatever the app language is. */
-@Composable
-private fun LanguageBlock(
-    label: String,
-    items: List<String>,
-    rtl: Boolean,
-    fontScale: Float,
-    textColor: androidx.compose.ui.graphics.Color
-) {
-    if (items.isEmpty()) return
-    val direction = if (rtl) LayoutDirection.Rtl else LayoutDirection.Ltr
-    val base = MaterialTheme.typography.bodyLarge
-    val itemStyle = base.copy(fontSize = base.fontSize * fontScale, lineHeight = base.lineHeight * fontScale)
-    CompositionLocalProvider(LocalLayoutDirection provides direction) {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(6.dp)
-        ) {
-            Text(
-                text = label,
-                style = MaterialTheme.typography.labelLarge,
-                color = textColor.copy(alpha = 0.75f)
-            )
-            items.forEach { item ->
-                Text(text = "• $item", style = itemStyle, color = textColor)
+            items.forEachIndexed { i, item ->
+                val key = "$sectionIndex:$i"
+                PointCard(
+                    text = item,
+                    detail = details[i],
+                    isOpen = key in open,
+                    isLong = key in longOpen,
+                    fontScale = fontScale,
+                    ds = ds,
+                    onToggle = { onToggle(key) },
+                    onToggleLong = { onToggleLong(key) }
+                )
             }
         }
     }

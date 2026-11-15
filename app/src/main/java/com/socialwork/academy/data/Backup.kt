@@ -32,6 +32,7 @@ object BackupJson {
             .put("completedTopics", JSONArray(s.completedTopics.toList()))
             .put("bookmarks", JSONArray(s.bookmarks.toList()))
             .put("fontScale", s.fontScale.toDouble())
+            .put("colorTheme", s.colorTheme)
         s.darkMode?.let { settings.put("darkMode", it) }
         s.lastTopicId?.let { settings.put("lastTopicId", it) }
         return JSONObject()
@@ -62,6 +63,7 @@ object BackupJson {
             val settings = UserSettings(
                 isUrdu = s.optBoolean("isUrdu", false),
                 darkMode = if (s.has("darkMode")) s.getBoolean("darkMode") else null,
+                colorTheme = s.optString("colorTheme", "emerald").ifBlank { "emerald" },
                 setupDone = true,
                 profileName = s.optString("profileName"),
                 institution = s.optString("institution"),

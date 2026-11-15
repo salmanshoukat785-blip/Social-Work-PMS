@@ -27,7 +27,7 @@ class ContentTest {
     @Test
     fun mostTopicsHaveMaterial() {
         val withMaterial = bundle.topics.values.count { it.sections.isNotEmpty() }
-        assertEquals(32, withMaterial)
+        assertEquals(33, withMaterial)
     }
 
     @Test
@@ -75,17 +75,29 @@ class ContentTest {
     }
 
     @Test
-    fun caseWorkKeepsItsSubHeadings() {
+    fun caseWorkAndItsPhasesAreSeparateTopics() {
         val headings = bundle.forTopic("p2_case_work")!!.sections.map { it.headingEn }
         assertTrue(headings.contains("Fields of Social Case Work"))
-        assertTrue(headings.contains("Diagnosis"))
-        assertTrue(headings.contains("Follow up"))
+        assertTrue(headings.contains("Elements Of Social Case Work"))
+        assertTrue(headings.contains("Objectives"))
+        assertTrue(!headings.contains("Diagnosis"))
+        val phases = bundle.forTopic("p2_case_work_phases")!!.sections.map { it.headingEn }
+        assertEquals(listOf("Study", "Diagnosis", "Treatment", "Follow up"), phases)
+    }
+
+    @Test
+    fun normsAndSocializationHaveTwoHeadings() {
+        val s = bundle.forTopic("p1_norms_socialization")!!.sections
+        assertEquals(listOf("Social Norms", "Factor Of Socialization"), s.map { it.headingEn })
+        assertEquals(listOf("Undefined Acts", "Folkways", "Mores", "Laws"), s[0].itemsEn)
+        assertEquals(5, s[1].itemsEn.size)
+        assertEquals(4, s[0].itemsUr.size)
+        assertEquals(5, s[1].itemsUr.size)
     }
 
     @Test
     fun nestedTopicsHaveTheThreeLevels() {
         val case = bundle.forTopic("p2_case_work")!!.sections
-        assertEquals(0, case.first { it.headingEn.startsWith("Phases") }.level)
         assertEquals(listOf("Person", "Problem", "Place", "Professional", "Process"),
             case.filter { it.level == 2 }.map { it.headingEn })
 

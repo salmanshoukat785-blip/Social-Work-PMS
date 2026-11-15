@@ -1,5 +1,5 @@
 {
- "version": 2,
+ "version": 3,
  "source": "Social Work Paper 1 & 2 (Word file)",
  "topics": [
   {
@@ -318,13 +318,25 @@
    "id": "p1_norms_socialization",
    "sections": [
     {
-     "headingEn": "Factor Of Socialization",
-     "headingUr": "سماجی کاری کے عوامل",
+     "headingEn": "Social Norms",
+     "headingUr": "معاشرتی اقدار",
      "itemsEn": [
       "Undefined Acts",
       "Folkways",
       "Mores",
-      "Laws",
+      "Laws"
+     ],
+     "itemsUr": [
+      "غیر واضح اعمال",
+      "رسوم و رواج",
+      "اخلاقیات",
+      "قوانین"
+     ]
+    },
+    {
+     "headingEn": "Factor Of Socialization",
+     "headingUr": "سماجی کاری کے عوامل",
+     "itemsEn": [
       "Family",
       "Peer Group",
       "Religious",
@@ -332,10 +344,6 @@
       "Mass – Media & Communication"
      ],
      "itemsUr": [
-      "غیر واضح اعمال",
-      "رسوم و رواج",
-      "اخلاقیات",
-      "قوانین",
       "خاندان",
       "ہم عمر گروہ",
       "مذہبی ادارے",
@@ -973,14 +981,12 @@
       "فرد کا مسئلہ حل کرنا",
       "سماجی مسائل کے حل میں حکومت کی مدد کرنا"
      ]
-    },
-    {
-     "headingEn": "Phases / Steps in Social Case Work",
-     "headingUr": "سوشل کیس ورک کے مراحل (فیزز/اسٹیپس)",
-     "itemsEn": [],
-     "itemsUr": [],
-     "level": 0
-    },
+    }
+   ]
+  },
+  {
+   "id": "p2_case_work_phases",
+   "sections": [
     {
      "headingEn": "Study",
      "headingUr": "مطالعہ (اسٹڈی)",

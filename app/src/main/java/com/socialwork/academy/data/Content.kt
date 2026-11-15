@@ -20,6 +20,7 @@ data class TopicSection(
 ) {
     fun heading(isUrdu: Boolean): String = if (isUrdu) headingUr else headingEn
     fun otherHeading(isUrdu: Boolean): String = if (isUrdu) headingEn else headingUr
+    fun items(isUrdu: Boolean): List<String> = if (isUrdu) itemsUr else itemsEn
 }
 
 data class TopicContent(

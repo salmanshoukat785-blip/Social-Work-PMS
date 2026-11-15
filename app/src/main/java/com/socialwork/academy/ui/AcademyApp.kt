@@ -22,6 +22,7 @@ import com.socialwork.academy.ui.screens.OnboardingScreen
 import com.socialwork.academy.ui.screens.ProfileScreen
 import com.socialwork.academy.ui.screens.SplashScreen
 import com.socialwork.academy.ui.theme.SocialWorkTheme
+import com.socialwork.academy.ui.theme.ThemePalette
 
 /**
  * Root of the app.
@@ -38,7 +39,9 @@ fun AcademyApp(viewModel: AppViewModel = viewModel()) {
     val strings = if (isUrdu) AppStrings.Urdu else AppStrings.English
     val direction = if (isUrdu) LayoutDirection.Rtl else LayoutDirection.Ltr
 
-    SocialWorkTheme(darkTheme = darkMode) {
+    val palette = ThemePalette.byId(settings?.colorTheme)
+
+    SocialWorkTheme(darkTheme = darkMode, palette = palette) {
         CompositionLocalProvider(LocalLayoutDirection provides direction) {
             Surface(
                 modifier = Modifier.fillMaxSize(),
@@ -107,6 +110,8 @@ fun AcademyApp(viewModel: AppViewModel = viewModel()) {
                             onUrduChange = { viewModel.setUrdu(it) },
                             darkMode = darkMode,
                             onDarkModeChange = { viewModel.setDarkMode(it) },
+                            colorTheme = palette.id,
+                            onColorThemeChange = { viewModel.setColorTheme(it) },
                             onTopicOpened = { viewModel.setLastTopic(it) },
                             onTopicCompletedChange = { id, done -> viewModel.setTopicCompleted(id, done) },
                             bookmarks = settings?.bookmarks ?: emptySet(),

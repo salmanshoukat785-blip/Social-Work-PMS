@@ -22,6 +22,8 @@ data class UserSettings(
     val isUrdu: Boolean = false,
     /** null = follow the phone's light/dark setting until the user picks one. */
     val darkMode: Boolean? = null,
+    /** Id of the chosen colour theme (see ThemePalette); unknown ids give the default. */
+    val colorTheme: String = "emerald",
     val setupDone: Boolean = false,
     val profileName: String = "",
     val institution: String = "",
@@ -47,6 +49,7 @@ class SettingsRepository(context: Context) {
             UserSettings(
                 isUrdu = prefs[KEY_URDU] ?: false,
                 darkMode = prefs[KEY_DARK],
+                colorTheme = prefs[KEY_THEME] ?: "emerald",
                 setupDone = prefs[KEY_SETUP_DONE] ?: false,
                 profileName = prefs[KEY_NAME] ?: "",
                 institution = prefs[KEY_INSTITUTION] ?: "",
@@ -63,6 +66,10 @@ class SettingsRepository(context: Context) {
 
     suspend fun setDarkMode(value: Boolean) {
         store.edit { it[KEY_DARK] = value }
+    }
+
+    suspend fun setColorTheme(id: String) {
+        store.edit { it[KEY_THEME] = id }
     }
 
     /** Saves the profile and marks the first-run setup as finished. */
@@ -107,6 +114,7 @@ class SettingsRepository(context: Context) {
         store.edit {
             it[KEY_URDU] = s.isUrdu
             if (s.darkMode != null) it[KEY_DARK] = s.darkMode else it.remove(KEY_DARK)
+            it[KEY_THEME] = s.colorTheme
             it[KEY_NAME] = s.profileName
             it[KEY_INSTITUTION] = s.institution
             it[KEY_COMPLETED] = s.completedTopics
@@ -128,6 +136,7 @@ class SettingsRepository(context: Context) {
     private companion object {
         val KEY_URDU = booleanPreferencesKey("is_urdu")
         val KEY_DARK = booleanPreferencesKey("dark_mode")
+        val KEY_THEME = stringPreferencesKey("color_theme")
         val KEY_SETUP_DONE = booleanPreferencesKey("setup_done")
         val KEY_NAME = stringPreferencesKey("profile_name")
         val KEY_INSTITUTION = stringPreferencesKey("profile_institution")

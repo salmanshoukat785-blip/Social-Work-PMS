@@ -38,14 +38,14 @@ object ChapterCatalog {
 
     val paper2: List<Chapter> = listOf(
         Chapter(2, "Philosophy of Social Work", "فلسفہِ سوشل ورک", null,
-            listOf("p2_philosophy", "p2_practice", "p2_objectives", "p2_principles",
-                "p2_professional_voluntary", "p2_basic_philosophy")),
+            listOf("p2_philosophy", "p2_objectives", "p2_principles", "p2_professional_voluntary")),
         Chapter(2, "Islam and Social Work", "اسلام اور سوشل ورک", null,
             listOf("p2_islam_social_work", "p2_worth_dignity", "p2_islamic_society_responsibility")),
         Chapter(2, "Methods of Social Work", "سوشل ورک کے طریقے", "p2_methods",
             listOf("p2_primary_methods", "p2_secondary_methods")),
         single("p2_social_relations"),
         single("p2_case_work"),
+        single("p2_case_work_phases"),
         single("p2_social_action"),
         single("p2_group_work"),
         single("p2_community_development"),

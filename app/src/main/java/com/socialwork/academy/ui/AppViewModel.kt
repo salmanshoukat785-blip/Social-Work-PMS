@@ -26,6 +26,10 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch { repository.setDarkMode(value) }
     }
 
+    fun setColorTheme(id: String) {
+        viewModelScope.launch { repository.setColorTheme(id) }
+    }
+
     fun saveProfile(name: String, institution: String) {
         viewModelScope.launch { repository.saveProfile(name, institution) }
     }

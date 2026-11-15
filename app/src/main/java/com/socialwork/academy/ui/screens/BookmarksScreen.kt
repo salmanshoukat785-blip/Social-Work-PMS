@@ -83,11 +83,6 @@ fun BookmarksScreen(
                                     color = MaterialTheme.colorScheme.secondary
                                 )
                                 Text(text = topic.title(isUrdu), style = MaterialTheme.typography.titleMedium)
-                                Text(
-                                    text = topic.otherTitle(isUrdu),
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
                             }
                             IconButton(onClick = { onRemoveBookmark(topic.id) }) {
                                 Icon(

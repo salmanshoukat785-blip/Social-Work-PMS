@@ -130,11 +130,6 @@ private fun ChapterBlock(
                         style = MaterialTheme.typography.titleMedium,
                         color = colors.onChapter
                     )
-                    Text(
-                        text = chapter.otherTitle(isUrdu),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = colors.onChapter.copy(alpha = 0.85f)
-                    )
                 }
                 if (topicId != null && topicId in bookmarks) {
                     Icon(Icons.Filled.Bookmark, contentDescription = null, tint = colors.onChapter)
@@ -187,11 +182,6 @@ private fun HeadingRow(
                     text = topic.title(isUrdu),
                     style = MaterialTheme.typography.titleMedium,
                     color = colors.onHeading
-                )
-                Text(
-                    text = topic.otherTitle(isUrdu),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = colors.onHeading.copy(alpha = 0.8f)
                 )
             }
             if (bookmarked) {

@@ -6,13 +6,13 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
-/** The chapter list follows the PDF: 6 chapters in Paper 1, 13 in Paper 2. */
+/** The chapter list follows the PDF: 6 chapters in Paper 1, 14 in Paper 2. */
 class ChaptersTest {
 
     @Test
     fun chapterCounts() {
         assertEquals(6, ChapterCatalog.paper1.size)
-        assertEquals(13, ChapterCatalog.paper2.size)
+        assertEquals(14, ChapterCatalog.paper2.size)
     }
 
     @Test

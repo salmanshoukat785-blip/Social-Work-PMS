@@ -39,11 +39,9 @@ object TopicCatalog {
 
     val paper2: List<Topic> = listOf(
         Topic("p2_philosophy", 2, "Philosophy of Social Work", "فلسفہِ سوشل ورک"),
-        Topic("p2_practice", 2, "Social Work Practice", "سوشل ورک پریکٹس"),
         Topic("p2_objectives", 2, "Objectives of Social Work", "مقاصد"),
         Topic("p2_principles", 2, "Principles of Social Work", "اصول"),
         Topic("p2_professional_voluntary", 2, "Professional & Voluntary Social Work", "پیشہ ورانہ اور رضاکارانہ"),
-        Topic("p2_basic_philosophy", 2, "Basic Philosophy", "بنیادی فلسفہ"),
         Topic("p2_islam_social_work", 2, "Islam and Social Work", "اسلام اور سوشل ورک"),
         Topic("p2_worth_dignity", 2, "Worth and Dignity of Individual", "فرد کی قدر و منزلت"),
         Topic("p2_islamic_society_responsibility", 2, "Islamic Society and Individual Responsibility", "اسلامی معاشرہ اور انفرادی ذمہ داری"),
@@ -52,6 +50,7 @@ object TopicCatalog {
         Topic("p2_secondary_methods", 2, "Secondary Methods", "ثانوی طریقے"),
         Topic("p2_social_relations", 2, "Social Relations", "سماجی تعلقات"),
         Topic("p2_case_work", 2, "Social Case Work", "سماجی انفرادی خدمت (سوشل کیس ورک)"),
+        Topic("p2_case_work_phases", 2, "Phases / Steps in Social Case Work", "سوشل کیس ورک کے مراحل (فیزز/اسٹیپس)"),
         Topic("p2_social_action", 2, "Social Action: Importance", "فوائد اور سماجی عمل کی اہمیت"),
         Topic("p2_group_work", 2, "Social Group Work", "سماجی گروہی کام"),
         Topic("p2_community_development", 2, "Community Development", "کمیونٹی ڈویلپمنٹ"),

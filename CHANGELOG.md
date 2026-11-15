@@ -1,5 +1,6 @@
 # Changelog
 
+- 1.0.0-rc5 (Phase 16): colour themes (Emerald, Royal, Rose, Ocean) in Settings with new colours; each point has its own card with Short / Read more explanation; only the chosen language is shown; source line removed; Social Norms split into 2 headings; Philosophy has 4 headings; Phases / Steps is its own chapter (Paper 2 has 14 chapters).
 - 1.0.0-rc4 (Phase 15): papers are shown by the PDF chapters (Paper 1: 6, Paper 2: 13), with 3 colours for chapter, heading and sub-heading; nested topics (Case Work, Group Work, Community Development) show their sub-headings.
 - 1.0.0-rc3 (Phase 14): "Additional Explanation" now also for all Paper 2 topics (19 topics). Not from the Word file; not teacher-reviewed.
 - 1.0.0-rc2 (Phase 13): "Additional Explanation" (short + long, English + Urdu) for every Paper 1 sub-heading. Written to help study; not from the Word file; not teacher-reviewed. Paper 2 to follow.

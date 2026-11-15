@@ -23,9 +23,9 @@ class DetailsTest {
 
     @Test
     fun bothPapersHaveDetails() {
-        assertEquals(32, details.topics.size)
+        assertEquals(33, details.topics.size)
         assertEquals(13, details.topics.keys.count { it.startsWith("p1_") })
-        assertEquals(19, details.topics.keys.count { it.startsWith("p2_") })
+        assertEquals(20, details.topics.keys.count { it.startsWith("p2_") })
         assertTrue(details.topics.keys.all { TopicCatalog.byId(it) != null })
     }
 

@@ -55,7 +55,7 @@ fun SearchScreen(
 ) {
     var query by rememberSaveable { mutableStateOf("") }
     val bundle = (content as? ContentState.Ready)?.bundle
-    val hits = remember(query, bundle) { SearchEngine.search(query, TopicCatalog.all, bundle) }
+    val hits = remember(query, bundle, isUrdu) { SearchEngine.search(query, TopicCatalog.all, bundle, isUrdu) }
     val focus = remember { FocusRequester() }
     // Open the keyboard straight away; ignore the rare case where the field is not ready yet.
     LaunchedEffect(Unit) { runCatching { focus.requestFocus() } }
@@ -129,11 +129,6 @@ private fun HitCard(hit: SearchHit, strings: AppStrings, isUrdu: Boolean, onClic
                 color = MaterialTheme.colorScheme.secondary
             )
             Text(text = hit.topic.title(isUrdu), style = MaterialTheme.typography.titleMedium)
-            Text(
-                text = hit.topic.otherTitle(isUrdu),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
             if (hit.matchCount > 0) {
                 Text(
                     text = strings.matches(hit.matchCount),

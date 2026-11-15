@@ -108,7 +108,7 @@ class ProgressBackupTest {
         settings = UserSettings(
             isUrdu = true, darkMode = true, setupDone = false, profileName = "علی",
             institution = "Uni", completedTopics = setOf("p1_family", "bogus_topic"),
-            lastTopicId = "p1_family", bookmarks = setOf("p2_case_work"), fontScale = 1.3f
+            lastTopicId = "p1_family", bookmarks = setOf("p2_case_work"), fontScale = 1.3f, colorTheme = "rose"
         ),
         notes = mapOf("p1_family" to "my note\nline 2", "bogus_topic" to "x"),
         knownCards = setOf("g0001"),
@@ -129,6 +129,7 @@ class ProgressBackupTest {
         assertTrue(back.settings.isUrdu)
         assertEquals(true, back.settings.darkMode)
         assertEquals(1.3f, back.settings.fontScale)
+        assertEquals("rose", back.settings.colorTheme)
         assertEquals(mapOf("p1_family" to "my note\nline 2"), back.notes)
         assertEquals(setOf("g0001"), back.knownCards)
         assertEquals(data.attempts, back.attempts)
